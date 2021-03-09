@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="container">
+            <br>
+            <div class="container">
+                <ul>
+                    <li><a href="/crear">Agregar especie</a></li>
+                    <li><a href="/Generar">Generar especie</a></li>
+                    <li><a href="/vista_especie">Ver especies</a></li>
+                </ul>
+            </div>
+            
+            <h2 th:if="${lista.isEmpty()}">No hay especies</h2>
+            <div class="container" th:if="${!lista.isEmpty()}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre Comun</th>
+                                <th scope="col">Nombre Cientifico</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">Acciones</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="especie : ${lista}">
+                                <td th:text="${especie.id}"></td>
+                                <td th:text="${especie.nombreComun}"></td>
+                                <td th:text="${especie.nombreCientifico}"></td>
+                                <td th:text="${especie.descripcion}"></td>
+                        <center> <td> <img width="60px" th:src="@{${especie.foto}}"></td></center>
+                        <td><a th:href="@{/actualizar/{id} (id=${especie.id})}"><img width="40px" th:src="@{/images/editar.png}"></a></a></td>
+                        <td><a th:href="@{/eliminar/{id} (id=${especie.id})}"><img width="40px" th:src="@{/images/eliminar.png}"></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div> 
+
+            </div>
+        </div>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>
