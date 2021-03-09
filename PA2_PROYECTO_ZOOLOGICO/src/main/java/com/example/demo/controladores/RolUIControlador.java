@@ -25,16 +25,12 @@ public class RolUIControlador {
     @Autowired
     private RolServicios servicio;
     
-    @RequestMapping("/irUsuario")
-    public String irUsuario(Model model) {
-        
-        setParametro(model, "lista_rol", servicio.getTodos());
-        
-        
-        
-        //System.out.println("Entro");
-        return "paginas/pruebaUsuario";
-    }
+//    @RequestMapping("/irUsuario")
+//    public void irUsuario(Model model) {
+//        setParametro(model, "lista_rol", servicio.getTodos());
+//        //System.out.println("Entro");
+//        //return "paginas/pruebaUsuario";
+//    }
     
     public void setParametro(Model model, String atributo, Object valor){
         model.addAttribute(atributo, valor);

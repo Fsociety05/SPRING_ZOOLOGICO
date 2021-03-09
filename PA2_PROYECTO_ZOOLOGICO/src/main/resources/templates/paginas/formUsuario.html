@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Crear Especie</title>
+        <title>Crear Usuario</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">    
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -25,24 +25,31 @@ and open the template in the editor.
        
 
         <div class="container">
-            <form>
+            <form action="#" th:action="@{/guardar_usuario}" th:object="${registro}" method="post">
+                
+                
+                
                 <div class="mb-3">
-                    <label for="usuario" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="usuario">
+                    <label for="nom_usuario" class="form-label">Usuario</label>
+                    <input class="form-control" type="text" id="nom_usuario" th:field="*{nom_usuario}" name="nom_usuario">
                 </div>
+                
+                <input type="hidden" th:field="*{id}" name="id" id="id">
+                
                 <div class="mb-3">
                     <label for="contrasenia" class="form-label">Contrasenia</label>
-                    <input type="password" class="form-control" id="contrasenia">
+                    <input type="text" class="form-control" id="contrasenia" th:field="*{contrasenia}" name="contrasenia">
                 </div>
                 <div class="mb-3">
-                    <label for="contrasenia" class="form-label">Rol</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <label for="Roles" class="form-label">Rol</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_rol}">
                         <option th:if="${lista_rol.isEmpty()}" value="0">No hay roles</option>
                         
-                        <option th:!if="${lista_rol.isEmpty()}" th:each="rol : ${lista_rol}" value="0" th:text="${rol.nombre}"></option>
+                        <option th:!if="${lista_rol.isEmpty()}" th:each="rol : ${lista_rol}" th:value="${rol.id}" th:text="${rol.nombre}" name="id_rol"></option>
                         
                     </select>
                 </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
         </div>
 

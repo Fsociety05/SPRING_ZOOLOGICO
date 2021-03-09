@@ -60,16 +60,16 @@ public class EspecieUIControlador {
         return "paginas/form_especies";
     }
     
-    @GetMapping("/Generar")
-    public String irGenerar() {
-       Especies tem =new Especies();
-        tem.setNombreComun("Especie generada");
-        tem.setDescripcion("esta es una descripcion por defecto");
-        tem.setFoto("/images/defecto.png");
-        
-        servicio.guardar(tem);
-        return "redirect:/mantenimiento_especie";
-    }
+//    @GetMapping("/Generar")
+//    public String irGenerar() {
+//       Especies tem =new Especies();
+//        tem.setNombreComun("Especie generada");
+//        tem.setDescripcion("esta es una descripcion por defecto");
+//        tem.setFoto("/images/defecto.png");
+//        
+//        servicio.guardar(tem);
+//        return "redirect:/mantenimiento_especie";
+//    }
     
     
     @PostMapping("/guardar")
