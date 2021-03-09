@@ -11,10 +11,15 @@ import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -24,7 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ControladorGeneral {
 
     private boolean primerInicio = true;
-
+    private Usuario usuario_logueado;
+//////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
 
@@ -41,10 +47,51 @@ public class ControladorGeneral {
             cargarTablas();
             primerInicio = false;
         }
+        
+         setParametro(model, "registro", new Usuario());
 
         return "index";
     }
+    
+    @RequestMapping("/inicio")
+    public String inicio(Model model) {
+        setParametro(model, "registro", usuario_logueado);
 
+        return "paginas/inicio";
+    }
+    
+    
+    @PostMapping("/login_usuario")
+    public String guardar(Usuario usuario, Model model, RedirectAttributes attribute) {
+        boolean usuarioEncontrado = false;
+        List<Usuario> lista_usuarios = servicioUsuario.getTodos();
+        
+        for(Usuario temp:lista_usuarios){
+            
+            if(temp.getNom_usuario().equals(usuario.getNom_usuario())){
+                if(temp.getContrasenia().equals(usuario.getContrasenia())){
+                    usuario_logueado=temp;
+                    return "redirect:/inicio";
+                }
+                
+            }
+        }
+        
+        if(usuarioEncontrado){
+            attribute.addFlashAttribute("error", "Contraseña incorrecta");
+        }else{
+            attribute.addFlashAttribute("error", "Usuario no encontrado"); //este es el mensage que quiero mostrar
+        }
+        
+        
+
+        return "redirect:/";
+    }
+    
+    public void setParametro(Model model, String atributo, Object valor) {
+        model.addAttribute(atributo, valor);
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
     private void cargarTablas() {
         Rol temp = new Rol();
         Rol temp2 = new Rol();

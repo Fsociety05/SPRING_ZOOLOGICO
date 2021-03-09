@@ -14,7 +14,10 @@ and open the template in the editor.
          
     </head>
 
-    <header>
+   
+    <body>
+        
+         <header>
         <!--MENSAJES-->
         <div class="alert alert-success alert-dismissable" th:if="${success != null}">
             <label th:text="${success}"></label>
@@ -25,14 +28,13 @@ and open the template in the editor.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </header>
-    <body>
         <div class="container">
             <br>
             <div class="container">
                 <ul>
                     <li><a href="/crear_usuario">Agregar Usuario</a></li>
                     <!--<li><a href="/vista_especie">Ver especies</a></li>-->
-                    <li><a href="/">Volver Inicio</a></li>
+                    <li><a href="/inicio">Volver Inicio</a></li>
 
                 </ul>
             </div>

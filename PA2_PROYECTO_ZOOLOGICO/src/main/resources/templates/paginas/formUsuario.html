@@ -18,24 +18,22 @@ and open the template in the editor.
         <div class="container">
             <h1>Supuesto formulario de usuario</h1>
         </div>
-        
+
         <div class="container">
             <a href="/">Volver Inicio</a>
         </div>
-       
+
 
         <div class="container">
             <form action="#" th:action="@{/guardar_usuario}" th:object="${registro}" method="post">
-                
-                
-                
+
                 <div class="mb-3">
                     <label for="nom_usuario" class="form-label">Usuario</label>
                     <input class="form-control" type="text" id="nom_usuario" th:field="*{nom_usuario}" name="nom_usuario">
                 </div>
-                
+
                 <input type="hidden" th:field="*{id}" name="id" id="id">
-                
+
                 <div class="mb-3">
                     <label for="contrasenia" class="form-label">Contrasenia</label>
                     <input type="text" class="form-control" id="contrasenia" th:field="*{contrasenia}" name="contrasenia">
@@ -44,9 +42,9 @@ and open the template in the editor.
                     <label for="Roles" class="form-label">Rol</label>
                     <select class="form-select" aria-label="Default select example" th:field="*{id_rol}">
                         <option th:if="${lista_rol.isEmpty()}" value="0">No hay roles</option>
-                        
+
                         <option th:!if="${lista_rol.isEmpty()}" th:each="rol : ${lista_rol}" th:value="${rol.id}" th:text="${rol.nombre}" name="id_rol"></option>
-                        
+
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
