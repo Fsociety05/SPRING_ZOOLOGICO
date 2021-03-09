@@ -1,14 +1,5 @@
 com\example\demo\modelos\Especies.class
 com\example\demo\repositorios\EspecieRepositorio.class
-com\example\demo\controladores\UsuarioUIControlador.class
-com\example\demo\modelos\Rol.class
 com\example\demo\Pa2ProyectoZoologicoApplication.class
-com\example\demo\modelos\Usuario.class
-com\example\demo\controladores\RolUIControlador.class
-com\example\demo\servicios\RolServicios.class
-com\example\demo\repositorios\RolRepositorio.class
 com\example\demo\servicios\EspecieServicios.class
-com\example\demo\servicios\UsuarioServicios.class
-com\example\demo\repositorios\UsuarioRepositorio.class
 com\example\demo\controladores\EspecieUIControlador.class
-com\example\demo\controladores\ControladorGeneral.class
