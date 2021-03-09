@@ -1,0 +1,36 @@
+#logo {
+    width: 100px;
+    height: 50px;
+}
+
+#menu {
+    background-image: url(/images/fondoNavBar.png);
+    
+    color: white;
+}
+
+ul {
+    color: white;
+}
+
+nav-link {
+    color: white;
+}
+
+#bodyUsuarios {
+    background-image: url(/images/fondoUsuarios);
+    background-repeat: no-repeat;
+    background-size:cov;
+    background-position: center center;
+    width: 100%;
+    height: auto;
+}
+
+label {
+    color: white;
+    font-size: large;
+}
+
+h2, h3 {
+    color: white;
+}
