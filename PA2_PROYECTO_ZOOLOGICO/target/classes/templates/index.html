@@ -14,6 +14,10 @@ and open the template in the editor.
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+
+        
+        
+
         <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +50,40 @@ and open the template in the editor.
             <h1>Inicio</h1>
         </div>
 
-        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+        <div class="container">
+            <!--<a href="/inicio">Ir a Inicio</a>-->
+            <h1>LOGIN</h1>
+            <div class="container-sm">
+                <form form action="#" th:action="@{/login_usuario}" th:object="${registro}" method="post">
+                   <div class="mb-3">
+                    <label for="nom_usuario" class="form-label">Usuario</label>
+                    <input class="form-control" type="text" id="nom_usuario" th:field="*{nom_usuario}" name="nom_usuario">
+                </div>
+
+                <div class="mb-3">
+                    <label for="contrasenia" class="form-label">Contrasenia</label>
+                    <input type="password" class="form-control" id="contrasenia" th:field="*{contrasenia}" name="contrasenia">
+                </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <!--MENSAJES-->
+            <div class="alert alert-success alert-dismissable" th:if="${success != null}">
+                <label th:text="${success}"></label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}"></label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+
+       <script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+
     </body>
 </html>
