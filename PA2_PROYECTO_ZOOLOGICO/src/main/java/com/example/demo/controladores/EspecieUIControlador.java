@@ -33,11 +33,7 @@ public class EspecieUIControlador {
     @Autowired
     private EspecieServicios servicio;  
     
-    @RequestMapping("/")
-    public String index(Model model) {
-        setParametro(model, "lista", servicio.getTodos());
-        return "index";
-    }
+    
     
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model) {
@@ -138,7 +134,7 @@ public class EspecieUIControlador {
         servicio.eliminar(id);
         return "redirect:/mantenimiento_especie";
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////
     private String retornaNombre(String url) {
         String nombre = "";
         int num_plecas = 2;
@@ -157,4 +153,7 @@ public class EspecieUIControlador {
 
         return nombre;
     }
+    
+    
+    
 }
