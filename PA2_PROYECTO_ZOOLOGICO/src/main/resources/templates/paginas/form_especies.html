@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Crear Especie</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/mantenimiento_especie" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/Generar" >Generar especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Usuarios</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text" style="color: white;">
+                        Acompañanos
+                    </span>
+                    <a class="navbar-brand" href="#"><img id="logo" th:src="@{/images/logo.png}" class="float-end" ></a>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-4 barra-titulo">
+            <a href="/mantenimiento_especie">Inicio</a>
+            / Agregar Especies
+        </div>
+        <div class="container contenedor mt-4">
+            <form action="#" th:action="@{/guardar}" th:object="${especie}" method="post" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label for="nombreComun validationDefault01">Nombre Comun</label>
+                    <input class="form-control" type="text" id="nombreComun validationDefault01" th:field="*{nombreComun}" name="nombreComun"  required>
+                </div>
+                <input type="hidden" th:field="*{id}" name="id" id="id">
+                <div class="form-group mb-3">
+                    <label for="nombreCientifico validationDefault02">Nombre Cientifico</label>
+                    <input class="form-control" type="text" id="nombreCientifico validationDefault02" th:field="*{nombreCientifico}" name="nombreCientifico" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="descripcion validationDefault03">Descripcion</label>
+                    <!--<input type="text" id="descripcion" th:field="*{descripcion}" name="descripcion">-->
+                    <textarea class="form-control" id="descripcion validationDefault03" th:field="*{descripcion}" name="descripcion" rows="10" cols="30" required></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="foto1 validationDefault04">Foto</label>
+                    <!--<input type="text" id="foto" th:field="*{foto}" name="foto" disable>-->
+                    <input class="form-control" type="file" name="foto1" id="foto1 validationDefault04" >
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="/mantenimiento_especie" class="btn btn-warning">Volver a mantenimiento</a>
+            </form>
+        </div>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

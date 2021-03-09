@@ -33,48 +33,44 @@ public class EspecieUIControlador {
     @Autowired
     private EspecieServicios servicio;  
     
-    @RequestMapping("/")
-    public String index(Model model) {
+    
+    
+    @RequestMapping("/mantenimiento_especie")
+    public String irMantenimiento(Model model) {
         setParametro(model, "lista", servicio.getTodos());
-        return "index";
+        return "paginas/mantenimiento_especies";
     }
     
-    @RequestMapping("/especie")
+    @RequestMapping("/vista_especie")
     public String vista(Model model) {
         setParametro(model, "lista", servicio.getTodos());
-        return "vista_especie";
+        return "paginas/vista_especie";
     }
     
     @GetMapping("/crear")
     public String irCrear(Model model) {
         setParametro(model, "especie", new Especies());
-        return "especie";
+        return "paginas/form_especies";
     }
     
     @GetMapping("/actualizar/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo){
         nomFoto = servicio.getValor(id).get().getFoto();
         setParametro(modelo, "especie", servicio.getValor(id));
-        return "especie";
+        return "paginas/form_especies";
     }
     
-    @GetMapping("/Generar")
-    public String irGenerar() {
-       Especies tem =new Especies();
-        tem.setNombreComun("Especie generada");
-        tem.setDescripcion("esta es una descripcion por defecto");
-        tem.setFoto("/images/defecto.png");
-        
-        servicio.guardar(tem);
-        return "redirect:/";
-    }
+//    @GetMapping("/Generar")
+//    public String irGenerar() {
+//       Especies tem =new Especies();
+//        tem.setNombreComun("Especie generada");
+//        tem.setDescripcion("esta es una descripcion por defecto");
+//        tem.setFoto("/images/defecto.png");
+//        
+//        servicio.guardar(tem);
+//        return "redirect:/mantenimiento_especie";
+//    }
     
-     @GetMapping("/ver")
-    public String irVer() {
-      
-        //return "redirect:/";
-        return "redirect:/especie";
-    }
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("foto1") MultipartFile file, Especies especie, Model model) {
@@ -110,7 +106,7 @@ public class EspecieUIControlador {
 
         servicio.guardar(especie);
         nomFoto="null";
-        return "redirect:/"; 
+        return "redirect:/mantenimiento_especie"; 
     }
     
     public void setParametro(Model model, String atributo, Object valor){
@@ -136,9 +132,9 @@ public class EspecieUIControlador {
         }
 
         servicio.eliminar(id);
-        return "redirect:/";
+        return "redirect:/mantenimiento_especie";
     }
-
+//////////////////////////////////////////////////////////////////////////////////////////////
     private String retornaNombre(String url) {
         String nombre = "";
         int num_plecas = 2;
@@ -157,4 +153,7 @@ public class EspecieUIControlador {
 
         return nombre;
     }
+    
+    
+    
 }
