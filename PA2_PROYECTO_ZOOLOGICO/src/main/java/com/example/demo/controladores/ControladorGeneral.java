@@ -73,7 +73,7 @@ public class ControladorGeneral {
                     usuario_logueado=temp;
                     return "redirect:/inicio";
                 }
-                
+                usuarioEncontrado = true;
             }
         }
         
