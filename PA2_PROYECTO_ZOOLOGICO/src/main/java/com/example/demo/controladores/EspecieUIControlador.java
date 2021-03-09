@@ -39,23 +39,29 @@ public class EspecieUIControlador {
         return "index";
     }
     
-    @RequestMapping("/especie")
+    @RequestMapping("/mantenimiento_especie")
+    public String irMantenimiento(Model model) {
+        setParametro(model, "lista", servicio.getTodos());
+        return "paginas/mantenimiento_especies";
+    }
+    
+    @RequestMapping("/vista_especie")
     public String vista(Model model) {
         setParametro(model, "lista", servicio.getTodos());
-        return "vista_especie";
+        return "paginas/vista_especie";
     }
     
     @GetMapping("/crear")
     public String irCrear(Model model) {
         setParametro(model, "especie", new Especies());
-        return "especie";
+        return "paginas/form_especies";
     }
     
     @GetMapping("/actualizar/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo){
         nomFoto = servicio.getValor(id).get().getFoto();
         setParametro(modelo, "especie", servicio.getValor(id));
-        return "especie";
+        return "paginas/form_especies";
     }
     
     @GetMapping("/Generar")
@@ -66,15 +72,9 @@ public class EspecieUIControlador {
         tem.setFoto("/images/defecto.png");
         
         servicio.guardar(tem);
-        return "redirect:/";
+        return "redirect:/mantenimiento_especie";
     }
     
-     @GetMapping("/ver")
-    public String irVer() {
-      
-        //return "redirect:/";
-        return "redirect:/especie";
-    }
     
     @PostMapping("/guardar")
     public String guardar(@RequestParam("foto1") MultipartFile file, Especies especie, Model model) {
@@ -110,7 +110,7 @@ public class EspecieUIControlador {
 
         servicio.guardar(especie);
         nomFoto="null";
-        return "redirect:/"; 
+        return "redirect:/mantenimiento_especie"; 
     }
     
     public void setParametro(Model model, String atributo, Object valor){
@@ -136,7 +136,7 @@ public class EspecieUIControlador {
         }
 
         servicio.eliminar(id);
-        return "redirect:/";
+        return "redirect:/mantenimiento_especie";
     }
 
     private String retornaNombre(String url) {
