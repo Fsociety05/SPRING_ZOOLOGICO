@@ -11,18 +11,44 @@ and open the template in the editor.
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="container">
-            <br>
-            <div class="container">
-                <ul>
-                    <li><a href="/crear">Agregar especie</a></li>
-                    <li><a href="/Generar">Generar especie</a></li>
-                    <li><a href="/vista_especie">Ver especies</a></li>
-                </ul>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="/mantenimiento_especie" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/Generar" >Generar especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Usuarios</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text" style="color: white;">
+                        Acompañanos
+                    </span>
+                    <a class="navbar-brand" href="#"><img id="logo" th:src="@{/images/logo.png}" class="float-end" ></a>
+                </div>
             </div>
-            
+        </nav>
+        <div class="container mt-5">
             <h2 th:if="${lista.isEmpty()}">No hay especies</h2>
             <div class="container" th:if="${!lista.isEmpty()}">
                 <div class="table-responsive">
