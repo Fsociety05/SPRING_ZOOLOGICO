@@ -16,7 +16,6 @@ body {
 .contenedor-grid{
     width: 100%;
     max-width: 1200px;
-    height: 270px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -44,5 +43,6 @@ body {
     height: 220px;
 }
 
-
-
+.row{
+    
+}

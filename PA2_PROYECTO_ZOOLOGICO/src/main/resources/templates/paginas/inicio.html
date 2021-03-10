@@ -14,6 +14,8 @@ and open the template in the editor.
         <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos-inicio.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="/css/estilos-footer.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <div>
@@ -39,6 +41,9 @@ and open the template in the editor.
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/" style="color: white;">Salir</a>
+                        </li>
                     </ul>
                     <span class="navbar-text" style="color: white;">
                         Acompañanos
@@ -47,10 +52,12 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
+        </div>
         
-        
+         
         <div class="contenedor-grid">
-            <div class="card">
+            
+                 <div class="card">
                 <a href="/mantenimiento_especie">
                 <img th:src="@{/images/especies.jpg}">
                 <h5>Especies</h5>
@@ -70,23 +77,126 @@ and open the template in the editor.
                 <h5>Itinerarios</h5>
              </a>   
             </div>
+         
             
-            <div class="card">
+         
+                <div class="card">
                 <a href="/irUsuario">
                 <img th:src="@{/images/usuarios.jpg}">
                 <h5>Usuarios</h5>
              </a>   
             </div>
+         
+            
+            
         </div>
-            <br><br>
+        
+       
+            
+        <!-- comment
+        <div class="contenedor-gridd container-md p5">
+        <div class="row">
+            <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/especies.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Especies</h5>
+  
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/habitats.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Habitats</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/itinerarios.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Itinerarios</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/usuarios.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img src="img/img2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Tigre</h5>
+
+                    </div>
+                </div>
+            </div>
+            
+             <div class="col-sm">
+                <div class="card w-100 card-border mb-5">
+                    <img src="img/img2.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Tigre</h5>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>-->
+         
          <div>
         <h1 th:if="${registro.id_rol==1}">Usuario es admin</h1>
         
         <h1 th:if="${registro.id_rol==2}">Usuario es empleado</h1>
         </div>
-        
-        </div>
        
+        <footer>
+            <div class="footer-container">
+                <div class="footer-main">
+                    <div class="footer-columna">
+                        <h3>Informacion</h3>
+                    </div>
+                    <div class="footer-columna">
+                        <h3>Direccion</h3>
+                        <span class="fa fa-map-marker"><p>434 Av. Morazan- La Ceiba</p></span>
+                        <span class="fa fa-phone"><p>(+504) 9523 3454</p></span>
+                        <span class="fa fa-envelope"><p>info@zooaurora.com</p></span>
+                    </div>
+                    <div class="footer-columna">
+                        <h3>Acerca de nosotros</h3>
+                        <p>
+                            El zoologico
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-copy-redes">
+			<div class="main-copy-redes">
+				<div class="footer-copy">
+					&copy; 2021, Todos los derechos reservados - | ZooAurora |.
+				</div>
+				<div class="footer-redes">
+					<a href="#" class="fa fa-facebook"></a>
+					<a href="#" class="fa fa-twitter"></a>
+					<a href="#" class="fa fa-youtube-play"></a>
+					<a href="#" class="fa fa-github"></a>
+				</div>
+			</div>
+		</div>
+        </footer>
+        
+        
         
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
