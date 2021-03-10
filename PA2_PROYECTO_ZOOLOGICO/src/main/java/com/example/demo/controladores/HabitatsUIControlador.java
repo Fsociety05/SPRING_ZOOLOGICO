@@ -45,6 +45,12 @@ public class HabitatsUIControlador {
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
     }
+    
+    @RequestMapping("/vista_habitats")
+    public String vista(Model model) {
+        setParametro(model, "listaHabitats", servicio.getTodos());
+        return "vista_habitats";
+    }
 
     @GetMapping("/crear_habitats")
     public String irCrear_usuario(Model model) {
