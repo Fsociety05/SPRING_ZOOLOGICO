@@ -8,9 +8,9 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -71,35 +71,34 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <h1>Inicio</h1>
+        <div class="container mt-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page">Registrar Vegetacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/irVegetacion">Mantenimiento Vegetacion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/inicio">Inicio</a>
+                </li>
+            </ul>
         </div>
-
-        <!--<div class="container">
-            <a href="/mantenimiento_especie">Ir a formulario especies</a>
+        <div class="container contenedor mt-4">
+            <form action="#" th:action="@{/guardarVegetacion}" th:object="${vegetacion}" method="post">
+                <div class="form-group mb-3">
+                    <label for="nombre validationDefault01">Nombre</label>
+                    <input class="form-control" type="text" id="nombre validationDefault01" th:field="*{nombre}" name="nombre"  required>
+                </div>
+                <input type="hidden" th:field="*{id}" name="id" id="id">
+                <div class="form-group mb-3">
+                    <label for="descripcion validationDefault03">Descripcion</label>
+                    <textarea class="form-control" id="descripcion validationDefault03" th:field="*{descripcion}" name="descripcion" rows="10" cols="30" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
         </div>
-        <div class="container">
-            <a href="/irUsuario">Ir a formulario Usuario</a>
-        </div>
-        <div class="container">
-            <a href="/irVegetacion">Ir a formulario Vegetacion</a>
-        </div>
-        <div class="container">
-            <a href="/irHabitats">Ir a formulario Habitats</a>
-        </div>
-        <div class="container">
-            <a href="/vista_habitats">Ver Habitat</a>
-        </div>
-        <div class="container">
-            <a href="/">Salir</a>
-        </div>-->
-
-
-
-        <h1 th:if="${registro.id_rol==1}">Usuario es admin</h1>
-
-        <h1 th:if="${registro.id_rol==2}">Usuario es empleado</h1>
-
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
     </body>
 </html>

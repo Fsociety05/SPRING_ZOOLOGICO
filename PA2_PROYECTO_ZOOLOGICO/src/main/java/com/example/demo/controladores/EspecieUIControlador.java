@@ -33,8 +33,6 @@ public class EspecieUIControlador {
     @Autowired
     private EspecieServicios servicio;  
     
-    
-    
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model) {
         setParametro(model, "lista", servicio.getTodos());
@@ -44,7 +42,7 @@ public class EspecieUIControlador {
     @RequestMapping("/vista_especie")
     public String vista(Model model) {
         setParametro(model, "lista", servicio.getTodos());
-        return "paginas/vista_especie";
+        return "vista_especie";
     }
     
     @GetMapping("/crear")
