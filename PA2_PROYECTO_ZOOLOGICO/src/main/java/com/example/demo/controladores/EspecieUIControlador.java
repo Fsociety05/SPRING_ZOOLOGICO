@@ -42,7 +42,7 @@ public class EspecieUIControlador {
     @RequestMapping("/vista_especie")
     public String vista(Model model) {
         setParametro(model, "lista", servicio.getTodos());
-        return "vista_especie";
+        return "paginas/vista_especie";
     }
     
     @GetMapping("/crear")

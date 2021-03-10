@@ -34,6 +34,10 @@ public class VegetacionServicio {
         return repositorio.findById(id);
     }
     
+    public Vegetacion getUno(Long id) {
+        return repositorio.findById(id).get();
+    }
+    
     public List<Vegetacion> getTodos() {
         return (List<Vegetacion>) repositorio.findAll();
     }
