@@ -5,9 +5,11 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
+import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
@@ -33,6 +35,9 @@ public class ControladorGeneral {
 //////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
+    
+    @Autowired
+    private ClimaServicios servicioClima;
 
     @Autowired
     private EspecieServicios servicioEspecie;
@@ -132,5 +137,22 @@ public class ControladorGeneral {
         tempUser.setId_rol(temp.getId());
         
         servicioUsuario.guardar(tempUser);
+        Clima temClima1 = new Clima();
+        Clima tempClima2 = new Clima();
+        Clima tempClima3 = new Clima();
+
+        temClima1.setNombre("Clima Calido");
+        temClima1.setDescripcion("Temperaturas elevadas más constantemente");
+        servicioClima.guardar(temClima1);
+
+        tempClima2.setNombre("Clima Templado");
+        tempClima2.setDescripcion("Instancia intermedia entre los cálidos y los fríos");
+        servicioClima.guardar(tempClima2);
+        
+        tempClima3.setNombre("Clima Frio");
+        tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
+        servicioClima.guardar(tempClima3);
+
+
     }
 }
