@@ -9,6 +9,9 @@ import com.example.demo.modelos.Habitats;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.VegetacionServicio;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,23 +32,37 @@ public class HabitatsUIControlador {
 
     @Autowired
     private ClimaServicios servicioClima;
-    
+
     @Autowired
     private VegetacionServicio servicioVegetacion;
 
-    @RequestMapping("/irHabitats")
-    public String irUsuario(Model model) {
-        setParametro(model, "lista_Habitats", servicio.getTodos());
-
-        return "paginas/mantenimiento_habitats";
-    }
-
+//    @RequestMapping("/irHabitats")
+//    public String irUsuario(Model model) {
+//        setParametro(model, "lista_Habitats", servicio.getTodos());
+//
+//        return "paginas/mantenimiento_habitats";
+//    }
     @RequestMapping("/mantenimiento_habitats")
     public String irMantenimiento(Model model) {
+        
+
+        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
+        int i = 0;
+        for (Habitats habitats : servicio.getTodos()) {
+            arreglo[i] = habitats;
+            i++;
+        }
+        
+        
+        for (int j = 0; j < arreglo.length; j++) {
+            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
+        }
+        
+        
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
     }
-    
+
     @RequestMapping("/vista_habitats")
     public String vista(Model model) {
         setParametro(model, "listaHabitats", servicio.getTodos());
@@ -71,16 +88,27 @@ public class HabitatsUIControlador {
     @PostMapping("/guardarHabitats")
     public String guardar(Habitats habitats, Model model) {
         servicio.guardar(habitats);
-        return "redirect:/irHabitats"; 
+        return "redirect:/mantenimiento_habitats";
     }
 
     @GetMapping("eliminarHabitats/{id}")
     public String eliminar(@PathVariable("id") Long id, Model modelo) {
         servicio.eliminar(id);
-        return "redirect:/irHabitats";
+        return "redirect:/mantenimiento_habitats";
     }
 
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
+    }
+
+    private Habitats[] redefinir(Habitats arr[]) {
+        Habitats temp[] = new Habitats[arr.length + 1];
+
+        for (int i = 0; i < arr.length; i++) {
+
+            temp[i] = arr[i];
+        }
+
+        return temp;
     }
 }
