@@ -8,6 +8,7 @@ package com.example.demo.controladores;
 import com.example.demo.modelos.Habitats;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.HabitatsServicios;
+import com.example.demo.servicios.VegetacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class HabitatsUIControlador {
 
     @Autowired
     private ClimaServicios servicioClima;
+    
+    @Autowired
+    private VegetacionServicio servicioVegetacion;
 
     @RequestMapping("/irHabitats")
     public String irUsuario(Model model) {
@@ -41,11 +45,18 @@ public class HabitatsUIControlador {
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
     }
+    
+    @RequestMapping("/vista_habitats")
+    public String vista(Model model) {
+        setParametro(model, "listaHabitats", servicio.getTodos());
+        return "vista_habitats";
+    }
 
     @GetMapping("/crear_habitats")
     public String irCrear_usuario(Model model) {
         setParametro(model, "habitats", new Habitats());
         setParametro(model, "lista_clima", servicioClima.getTodos()); //se agregan los roles al combobox
+        setParametro(model, "listaVegetaciones", servicioVegetacion.getTodos()); //se agregan los roles al combobox
         return "paginas/formHabitats";
     }
 
@@ -53,6 +64,7 @@ public class HabitatsUIControlador {
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
         setParametro(modelo, "habitats", servicio.getValor(id));
         setParametro(modelo, "lista_clima", servicioClima.getTodos());
+        setParametro(modelo, "listaVegetaciones", servicioVegetacion.getTodos()); //se agregan los roles al combobox
         return "paginas/formHabitats";
     }
 
