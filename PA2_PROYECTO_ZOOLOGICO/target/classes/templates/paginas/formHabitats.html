@@ -76,16 +76,16 @@ and open the template in the editor.
                 </div>
                 <input type="hidden" th:field="*{id}" name="id" id="id">
                 <div class="mb-3">
-                    <label for="Climas" class="form-label">Rol</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_clima}">
-                        <option th:if="${lista_clima.isEmpty()}" value="0">No hay roles</option>
-                        <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${clima.id}" th:text="${clima.nombre}" name="id_clima"></option>
+                    <label for="nombreClima" class="form-label">Rol</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{nombreClima}">
+                        <option th:if="${lista_clima.isEmpty()}" value="0">No hay climas</option>
+                        <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${clima.nombre}" th:text="${clima.nombre}" name="nombreClima"></option>
                     </select>
-                    <!--<label for="Climas" class="form-label">Rol</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_clima}">
-                        <option th:if="${lista_clima.isEmpty()}" value="0">No hay roles</option>
-                        <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${rol.id}" th:text="${rol.clima}" name="id_clima"></option>
-                    </select>-->
+                    <label for="nombreVegetacion" class="form-label">Vegetacion</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{nombreVegetacion}">
+                        <option th:if="${listaVegetaciones.isEmpty()}" value="0">No hay vegetacion</option>
+                        <option th:!if="${listaVegetaciones.isEmpty()}" th:each="vegetacionn : ${listaVegetaciones}" th:value="${vegetacionn.nombre}" th:text="${vegetacionn.nombre}" name="nombreVegetacion"></option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
             </form>

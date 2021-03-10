@@ -28,6 +28,8 @@ public class Habitats implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String nombreClima;
     private Long id_clima;
     private Long id_vegetacion;
+    private String nombreVegetacion;
 }
