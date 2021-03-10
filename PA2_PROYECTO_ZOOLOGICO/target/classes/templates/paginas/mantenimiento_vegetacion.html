@@ -22,28 +22,48 @@ and open the template in the editor.
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Inicio</a>
+                            <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="/mantenimiento_especie" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Especies
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear">Agregar especie</a></li>
-                                <li><a class="dropdown-item" href="/vista_especie">Ver especies</a></li>
-                                <li><a class="dropdown-item" href="/inicio">Volver Inicio</a></li>
+                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_especie" >Mantenimiento Especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Habitats
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear_habitats" >Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/vista_habitats" >Ver Habitáts</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_habitats" >Mantenimiento Habitát</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Vegetación
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crearVegetacion" >Agregar Vegetación</a></li>
+                                <li><a class="dropdown-item" href="/irVegetacion" >Mantenimiento Vegetacion</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/crearVegetacion" style="color: white;">Vegetacion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" style="color: white;">Usuarios</a>
+                            <a class="nav-link" href="#" style="color: white;">Salir</a>
                         </li>
                     </ul>
+
                     <span class="navbar-text" style="color: white;">
                         Acompañanos
                     </span>
@@ -70,7 +90,7 @@ and open the template in the editor.
             <h2 th:if="${listaVegetacion.isEmpty()}">No hay Vegetacion</h2>
             <div class="container" th:if="${!listaVegetacion.isEmpty()}">
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-dark table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
