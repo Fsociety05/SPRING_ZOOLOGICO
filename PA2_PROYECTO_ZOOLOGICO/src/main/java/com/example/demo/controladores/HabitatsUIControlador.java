@@ -49,7 +49,7 @@ public class HabitatsUIControlador {
     @RequestMapping("/vista_habitats")
     public String vista(Model model) {
         setParametro(model, "listaHabitats", servicio.getTodos());
-        return "vista_habitats";
+        return "paginas/vista_habitats";
     }
 
     @GetMapping("/crear_habitats")
