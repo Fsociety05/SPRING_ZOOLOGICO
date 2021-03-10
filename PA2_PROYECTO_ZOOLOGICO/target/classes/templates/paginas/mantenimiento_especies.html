@@ -14,6 +14,7 @@ and open the template in the editor.
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+
         <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,9 +33,9 @@ and open the template in the editor.
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
-                                <li><a class="dropdown-item" href="/Generar" >Generar especie</a></li>
-                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                                <li><a class="dropdown-item" href="/crear">Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie">Ver especies</a></li>
+                                <li><a class="dropdown-item" href="/inicio">Volver Inicio</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -49,6 +50,7 @@ and open the template in the editor.
             </div>
         </nav>
         <div class="container mt-5">
+
             <h2 th:if="${lista.isEmpty()}">No hay especies</h2>
             <div class="container" th:if="${!lista.isEmpty()}">
                 <div class="table-responsive">
@@ -70,7 +72,7 @@ and open the template in the editor.
                                 <td th:text="${especie.nombreComun}"></td>
                                 <td th:text="${especie.nombreCientifico}"></td>
                                 <td th:text="${especie.descripcion}"></td>
-                        <center> <td> <img width="60px" th:src="@{${especie.foto}}"></td></center>
+                         <td> <img width="60px" th:src="@{${especie.foto}}"></td>
                         <td><a th:href="@{/actualizar/{id} (id=${especie.id})}"><img width="40px" th:src="@{/images/editar.png}"></a></a></td>
                         <td><a th:href="@{/eliminar/{id} (id=${especie.id})}"><img width="40px" th:src="@{/images/eliminar.png}"></a></td>
                         </tr>
