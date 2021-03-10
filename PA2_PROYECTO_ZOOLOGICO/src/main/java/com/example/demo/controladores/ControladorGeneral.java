@@ -66,6 +66,14 @@ public class ControladorGeneral {
     }
     
     
+    @RequestMapping("/habitat_especie")
+    public String irHabitat_especie(Model model) {
+        //setParametro(model, "registro", usuario_logueado);
+
+        return "paginas/form_habitat_especie";
+    }
+    
+    
     @PostMapping("/login_usuario")
     public String guardar(Usuario usuario, Model model, RedirectAttributes attribute) {
         boolean usuarioEncontrado = false;
