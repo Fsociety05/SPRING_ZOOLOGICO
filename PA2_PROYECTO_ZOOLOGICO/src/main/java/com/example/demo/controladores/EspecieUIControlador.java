@@ -33,8 +33,6 @@ public class EspecieUIControlador {
     @Autowired
     private EspecieServicios servicio;  
     
-    
-    
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model) {
         setParametro(model, "lista", servicio.getTodos());
