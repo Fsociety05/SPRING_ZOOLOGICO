@@ -5,10 +5,18 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.EspecieHabitat;
+import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Habitats;
+import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.servicios.ClimaServicios;
+import com.example.demo.servicios.EspecieHabitatServicios;
+import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.HabitatsServicios;
+import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.VegetacionServicio;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +34,15 @@ public class HabitatsUIControlador {
 
     @Autowired
     private HabitatsServicios servicio;
+    
+    @Autowired
+    private EspecieServicios servicioEspecie;
+    
+    @Autowired
+    private IndiceVulnerabilidadServicios servicioVulneravilidad;
+    
+    @Autowired
+    private EspecieHabitatServicios servicioEspecieHabitat;
 
     @Autowired
     private ClimaServicios servicioClima;
@@ -61,6 +78,25 @@ public class HabitatsUIControlador {
     public String vistaEliminarEspecie() {
         //setParametro(model, "listaHabitats", servicio.getTodos());
         return "paginas/eliminar_especie_habitat";
+    }
+    
+    @GetMapping("/verEspecieHabitats/{id}")
+    public String verEspeciesEnHabitat(@PathVariable("id") Long id, Model modelo) {
+        
+        List<Especies> tempEspecie = new ArrayList<>();
+       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
+        
+        
+        for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id)) {
+            tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
+        }
+        
+        setParametro(modelo, "listaEspecies", tempEspecie);
+        setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
+        setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id)); //se agregan los roles al combobox
+        
+        System.out.println(id);
+        return "paginas/ver_especie_habitat";
     }
 
     @GetMapping("/crear_habitats")
