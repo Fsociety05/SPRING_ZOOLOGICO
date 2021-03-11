@@ -75,7 +75,7 @@ and open the template in the editor.
             <a href="/inicio">Inicio</a>
             / Viendo Especies del Habitat
         </div>
-       <h2 th:if="${listaEspecies.isEmpty()}">No hay especies</h2>
+        <h2 th:if="${listaEspecies.isEmpty()}">No hay especies</h2>
         <div class="container-md py-4 contenedor-card" th:if="${!listaEspecies.isEmpty()}">
             <div class="col-sm contend-cards px-2" th:each="especie : ${listaEspecies}">
                 <div class="card w-100 card-border mb-5">
@@ -87,9 +87,15 @@ and open the template in the editor.
                         <div th:each="vulnerabilidad : ${listaVulnerabilidad}">
                             <div th:each="especieHabitat : ${listaEspecieHabitat}">
                                 <div th:if="${especieHabitat.id_vulnerabilidad==vulnerabilidad.id}">
-                                    <p th:if="${especieHabitat.id_especie==especie.id}" class="card-text" th:text="${vulnerabilidad.nombre_indice}"></p>
+                                    <p th:if="${especieHabitat.id_especie==especie.id}" class="card-text" th:text="${'Indice de vulnerabilidad: '+vulnerabilidad.nombre_indice}"></p>
                                 </div>
-                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div th:each="especieHabitat : ${listaEspecieHabitat}">
+                            <div th:if="${especieHabitat.id_especie==especie.id}">
+                                <a th:href="@{/eliminarEspecieHabitats/{id}/{id_especie} (id=${especieHabitat.id_habitat},id_especie=${especie.id})}" class="btn btn-warning">Eliminar Especie</a>
                             </div>
                         </div>
                     </div>

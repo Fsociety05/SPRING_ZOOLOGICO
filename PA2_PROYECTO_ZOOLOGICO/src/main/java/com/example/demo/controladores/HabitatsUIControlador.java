@@ -74,10 +74,33 @@ public class HabitatsUIControlador {
         return "paginas/vista_habitats";
     }
     
-    @RequestMapping("/eliminar_especie_habitat")
-    public String vistaEliminarEspecie() {
+    @GetMapping("/eliminarEspecieHabitats/{id}/{id_especie}")
+    public String vistaEliminarEspecie(@PathVariable("id") Long id_habitat,@PathVariable("id_especie") Long id_especie, Model modelo) {
         //setParametro(model, "listaHabitats", servicio.getTodos());
-        return "paginas/eliminar_especie_habitat";
+        
+        System.out.println("Id especie="+id_especie+" id habitat="+id_habitat);
+        
+        List<Especies> tempEspecie = new ArrayList<>();
+       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
+        
+       
+        
+        for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id_habitat)) {
+            
+            if(especieHabitat.getId_especie()==id_especie){
+                servicioEspecieHabitat.eliminar(especieHabitat.getId());
+            }else{
+                tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
+            }
+            
+        }
+        
+        setParametro(modelo, "listaEspecies", tempEspecie);
+        setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
+        setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id_habitat)); //se agregan los roles al combobox
+        
+        
+        return "paginas/ver_especie_habitat";
     }
     
     @GetMapping("/verEspecieHabitats/{id}")
