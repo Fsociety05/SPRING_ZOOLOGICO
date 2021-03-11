@@ -56,6 +56,12 @@ public class HabitatsUIControlador {
         setParametro(model, "listaHabitats", servicio.getTodos());
         return "paginas/vista_habitats";
     }
+    
+    @RequestMapping("/eliminar_especie_habitat")
+    public String vistaEliminarEspecie() {
+        //setParametro(model, "listaHabitats", servicio.getTodos());
+        return "paginas/eliminar_especie_habitat";
+    }
 
     @GetMapping("/crear_habitats")
     public String irCrear_usuario(Model model) {
