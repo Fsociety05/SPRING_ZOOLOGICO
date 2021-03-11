@@ -46,7 +46,7 @@ public class ItinerarioUIControlador {
     }
     
     private void verificacion() {
-        Itinerario[] arreglo = new Itinerario[servicio.getTodos().size()];
+        Itinerario arreglo[] = new Itinerario[servicio.getTodos().size()];
         int i = 0;
         for (Itinerario itinerario : servicio.getTodos()) {
             arreglo[i] = itinerario;
@@ -54,7 +54,9 @@ public class ItinerarioUIControlador {
         }
 
         for (int j = 0; j < arreglo.length; j++) {
-            arreglo[j].setNombreHabitat(servicioHabitat.getUno(arreglo[j].getId_habitat()).getNombre() + "");
+            //arreglo[j].setNombreHabitat(servicioHabitat.getUno(arreglo[j].getId_habitat()).getNombre());
+            
+            arreglo[j].setNombreHabitat("Hols");
         }
     }
 

@@ -167,7 +167,28 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        IndiceVulnerabilidad tempVulne = new IndiceVulnerabilidad();
+        tempVulne.setNombre_indice("Bajo");
+        tempVulne.setDescripcion("");
+        servicioIndice.guardar(tempVulne);
+        
+        IndiceVulnerabilidad tempVulne2 = new IndiceVulnerabilidad();
+        tempVulne2.setNombre_indice("Medio");
+        tempVulne2.setDescripcion("");
+        servicioIndice.guardar(tempVulne2);
+
+        
+        IndiceVulnerabilidad tempVulne3 = new IndiceVulnerabilidad();
+        tempVulne2.setNombre_indice("Alto");
+        tempVulne2.setDescripcion("");
+        servicioIndice.guardar(tempVulne3);
 
 
+///////////////////////////////////////////////////////////////////////////////
+        Vegetacion tempVege3 = new Vegetacion();
+        tempVege3.setNombre("Bosques de Sabana");
+        tempVege3.setDescripcion("regiones entre el desierto y el bosque tropical.");
+        servicioVegetacion.guardar(tempVege3);
     }
 }
