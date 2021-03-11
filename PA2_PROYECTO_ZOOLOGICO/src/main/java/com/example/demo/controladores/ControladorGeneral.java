@@ -9,11 +9,13 @@ import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Vegetacion;
 import com.example.demo.modelos.IndiceVulnerabilidad;
+import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
+import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
@@ -39,6 +41,9 @@ public class ControladorGeneral {
 //////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
+    
+    @Autowired
+    private HabitatsServicios servicioHabitat;
     
     @Autowired
     private ClimaServicios servicioClima;
@@ -162,33 +167,7 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
-        
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        IndiceVulnerabilidad tempInd = new IndiceVulnerabilidad();
-        IndiceVulnerabilidad tempInd2 = new IndiceVulnerabilidad();
-        IndiceVulnerabilidad tempInd3 = new IndiceVulnerabilidad();
-        
-        
-        tempInd.setNombre_indice("ALTO");
-        tempInd.setDescripcion("");
-        
-        tempInd2.setNombre_indice("MEDIO");
-        tempInd2.setDescripcion("");
-        
-        tempInd3.setNombre_indice("BAJO");
-        tempInd3.setDescripcion("");
-        
-        servicioIndice.guardar(tempInd);
-        servicioIndice.guardar(tempInd2);
-        servicioIndice.guardar(tempInd3);
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-        
-        Vegetacion tempVege = new Vegetacion();
-        
-        tempVege.setNombre("Selva húmeda");
-        tempVege.setDescripcion("Prueba");
-        
-        servicioVegetacion.guardar(tempVege);
+
+
     }
 }

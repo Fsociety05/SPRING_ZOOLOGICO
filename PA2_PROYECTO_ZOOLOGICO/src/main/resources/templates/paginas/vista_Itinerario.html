@@ -8,9 +8,9 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -24,15 +24,8 @@ and open the template in the editor.
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Itinerario
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear_itinerario" >Agregar Itinerario</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_itinerario" >Mantenimiento Itinerario</a></li>
-                                <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
@@ -78,13 +71,27 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
-
-        <h1 th:if="${registro.id_rol==1}">Usuario es admin</h1>
-
-        <h1 th:if="${registro.id_rol==2}">Usuario es empleado</h1>
-        
-        <a href="/habitat_especie">Ir especie habitat</a>
-
+        <div class="container mt-4 barra-titulo">
+            <a href="/inicio">Inicio</a>
+            / Vista de Itinerarios
+        </div>
+        <div class="container mt-4">
+            <h2 th:if="${lista_Itinerario.isEmpty()}">No hay itinerarios</h2>
+        </div>
+        <div class="container-md py-4 contenedor-card" th:if="${!lista_Itinerario.isEmpty()}">
+            <div class="col-sm contend-cards px-2" th:each="itinerarios : ${lista_Itinerario}">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/habitat-default.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${itinerarios.nombre}"></h5>
+                        <p class="card-text" th:text="${'Horario: '+itinerarios.horaIncio+' - '+itinerarios.horaFin}"></p>
+                        <p class="card-text" th:text="${'Area: '+itinerarios.area}"></p>
+                        <p class="card-text" th:text="${'Numero Visitantes: '+itinerarios.numeroVisitantes}"></p>
+                        <p class="card-text" th:text="${itinerarios.nombreHabitat}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
 </html>
