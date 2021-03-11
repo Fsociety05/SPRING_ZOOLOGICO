@@ -52,7 +52,15 @@ public class HabitatEspecieUIControlador {
     
     @PostMapping("/guardar_EspecieHabitat")
     public String guardar(EspecieHabitat entidad, Model model, RedirectAttributes attribute) {
-
+        
+        
+        
+        for (EspecieHabitat object : servicio.getPorHabitat(entidad.getId_habitat())) {
+            if(object.getId_especie()==entidad.getId_especie()){
+                attribute.addFlashAttribute("error", "Especie ya esta agragada al habitat"); 
+                return "redirect:/habitat_especie";
+            }
+        }
         //System.out.println("Entro");
         servicio.guardar(entidad);
 
