@@ -53,16 +53,16 @@ public class HabitatsUIControlador {
     @RequestMapping("/mantenimiento_habitats")
     public String irMantenimiento(Model model) {
         
-        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
-        int i = 0;
-        for (Habitats habitats : servicio.getTodos()) {
-            arreglo[i] = habitats;
-            i++;
-        }
-        
-        for (int j = 0; j < arreglo.length; j++) {
-            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
-        }
+//        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
+//        int i = 0;
+//        for (Habitats habitats : servicio.getTodos()) {
+//            arreglo[i] = habitats;
+//            i++;
+//        }
+//        
+//        for (int j = 0; j < arreglo.length; j++) {
+//            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
+//        }
         
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
@@ -78,7 +78,7 @@ public class HabitatsUIControlador {
     public String vistaEliminarEspecie(@PathVariable("id") Long id_habitat,@PathVariable("id_especie") Long id_especie, Model modelo) {
         //setParametro(model, "listaHabitats", servicio.getTodos());
         
-        System.out.println("Id especie="+id_especie+" id habitat="+id_habitat);
+        //System.out.println("Id especie="+id_especie+" id habitat="+id_habitat);
         
         List<Especies> tempEspecie = new ArrayList<>();
        // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
@@ -140,6 +140,9 @@ public class HabitatsUIControlador {
 
     @PostMapping("/guardarHabitats")
     public String guardar(Habitats habitats, Model model) {
+        
+        habitats.setNombreVegetacion(servicioVegetacion.getValor(habitats.getId_vegetacion()).get().getNombre());
+        
         servicio.guardar(habitats);
         return "redirect:/mantenimiento_habitats";
     }
