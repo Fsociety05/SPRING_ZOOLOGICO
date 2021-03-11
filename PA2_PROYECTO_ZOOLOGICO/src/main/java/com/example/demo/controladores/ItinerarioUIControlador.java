@@ -33,32 +33,18 @@ public class ItinerarioUIControlador {
 
     @RequestMapping("/mantenimiento_itinerario")
     public String irMantenimiento(Model model) {
-        verificacion();
+        //verificacion();
         setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/mantenimiento_itinerario";
     }
 
     @RequestMapping("/vista_itinerario")
     public String vista(Model model) {
-        verificacion();
+        //verificacion();
         setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/vista_Itinerario";
     }
     
-    private void verificacion() {
-        Itinerario arreglo[] = new Itinerario[servicio.getTodos().size()];
-        int i = 0;
-        for (Itinerario itinerario : servicio.getTodos()) {
-            arreglo[i] = itinerario;
-            i++;
-        }
-
-        for (int j = 0; j < arreglo.length; j++) {
-            //arreglo[j].setNombreHabitat(servicioHabitat.getUno(arreglo[j].getId_habitat()).getNombre());
-            
-            arreglo[j].setNombreHabitat("Hols");
-        }
-    }
 
     @GetMapping("/crear_itinerario")
     public String irCrear_itinerario(Model model) {
@@ -76,6 +62,13 @@ public class ItinerarioUIControlador {
 
     @PostMapping("/guardarItinerario")
     public String guardar(Itinerario itinerario, Model model) {
+        
+        //System.out.println(itinerario.toString());
+        
+        itinerario.setNombreHabitat(servicioHabitat.getValor(itinerario.getId_habitat()).get().getNombre());
+        
+        ///itinerario.setNombreHabitat(servicioHabitat.getUno(itinerario.getId_habitat()).getNombre());
+        
         servicio.guardar(itinerario);
         return "redirect:/mantenimiento_itinerario";
     }
