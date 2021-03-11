@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Especies
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_especie" >Mantenimiento Especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Habitats
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear_habitats" >Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/vista_habitats" >Ver Habitáts</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_habitats" >Mantenimiento Habitát</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Vegetación
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crearVegetacion" >Agregar Vegetación</a></li>
+                                <li><a class="dropdown-item" href="/irVegetacion" >Mantenimiento Vegetacion</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" style="color: white;">Salir</a>
+                        </li>
+                    </ul>
+
+                    <span class="navbar-text" style="color: white;">
+                        Acompañanos
+                    </span>
+                    <a class="navbar-brand" href="#"><img id="logo" th:src="@{/images/logo.png}" class="float-end" ></a>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-4 barra-titulo">
+            <a href="/mantenimiento_especie">Inicio</a>
+            / Vista de Hábitats
+        </div>
+        <h2 th:if="${listaHabitats.isEmpty()}">No hay habitats</h2>
+        <div class="container-md py-4 contenedor-card" th:if="${!listaHabitats.isEmpty()}">
+            <div class="col-sm contend-cards px-2" th:each="habitats : ${listaHabitats}">
+                <div class="card w-100 card-border mb-5">
+                    <img th:src="@{/images/habitat-default.jpg}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${habitats.nombre}"></h5>
+                        <p class="card-text" th:text="${habitats.nombreClima}"></p>
+                        <p class="card-text" th:text="${habitats.nombreVegetacion}"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/eliminar_especie_habitat" class="btn btn-warning">Eliminar Especie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>
