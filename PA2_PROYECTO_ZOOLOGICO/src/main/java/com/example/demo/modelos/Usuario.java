@@ -30,5 +30,10 @@ public class Usuario implements Serializable{
     private Long id;
     private String nom_usuario;
     private String contrasenia;
+    private String nombre;
+    private String apellido;
+    private String dni;
+    private String telefono;
+    private String correo;
     private Long id_rol;
 }
