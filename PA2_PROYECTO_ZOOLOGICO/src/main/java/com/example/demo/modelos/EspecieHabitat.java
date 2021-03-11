@@ -27,6 +27,7 @@ public class EspecieHabitat implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Long id_habitat;
     private Long id_especie;
     private Long id_vulnerabilidad;

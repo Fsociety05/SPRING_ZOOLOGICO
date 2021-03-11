@@ -1,5 +1,5 @@
-com\example\demo\modelos\Especies.class
-com\example\demo\repositorios\EspecieRepositorio.class
 com\example\demo\Pa2ProyectoZoologicoApplication.class
 com\example\demo\servicios\EspecieServicios.class
 com\example\demo\controladores\EspecieUIControlador.class
+com\example\demo\modelos\Especies.class
+com\example\demo\repositorios\EspecieRepositorio.class

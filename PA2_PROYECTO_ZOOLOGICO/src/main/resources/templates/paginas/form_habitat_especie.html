@@ -8,9 +8,9 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -71,16 +71,51 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <h1>Inicio</h1>
+
+
+        <div class="container p-3 my-3 ">
+            <h1>Agregando Especies a habitats</h1>
+
+
+            <form class="container">
+
+                <div class="container">
+                    <label>Habitat</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option th:if="${lista_habitat.isEmpty()}" name="lista_habitat">Vacio</option>
+                        <option th:!if="${lista_habitat.isEmpty()}" th:each="habitat : ${lista_habitat}" th:value="${habitat.id}" th:text="${habitat.nombre}" name="id_habitat"></option>
+
+                    </select>
+                </div>
+
+                <div class="container">
+                    <label>Especie</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option th:if="${lista_especie.isEmpty()}" name="lista_especie">Vacio</option>
+                        <option th:!if="${lista_especie.isEmpty()}" th:each="especie : ${lista_especie}" th:value="${especie.id}" th:text="${especie.nombreComun}" name="id_especie"></option>
+
+                    </select>
+                </div>
+
+                <div class="container">
+                    <label>Indice de vulnerabilidad</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option th:if="${lista_vulnerabilidad.isEmpty()}"  name="id_vulnerabilidad">Vacio</option>
+                        <option th:!if="${lista_vulnerabilidad.isEmpty()}" th:each="vulnerabilidad : ${lista_vulnerabilidad}" th:value="${vulnerabilidad.id}" th:text="${vulnerabilidad.nombre_indice}" name="id_vulnerabilidad"></option>
+
+                    </select>
+                </div>
+                <div class="container" style=" margin-top: 10px">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+
+            </form>
+
+
         </div>
 
-        <h1 th:if="${registro.id_rol==1}">Usuario es admin</h1>
-
-        <h1 th:if="${registro.id_rol==2}">Usuario es empleado</h1>
-        
-        <a href="/habitat_especie">Ir especie habitat</a>
 
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
     </body>
 </html>
