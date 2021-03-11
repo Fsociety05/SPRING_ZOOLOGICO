@@ -72,18 +72,18 @@ and open the template in the editor.
             </div>
         </nav>
         <div class="container mt-4 barra-titulo">
-            <a href="/mantenimiento_especie">Inicio</a>
-            / Vista de Hábitats
+            <a href="/inicio">Inicio</a>
+            / Eliminar especies del habitat
         </div>
-        <h2 th:if="${listaHabitats.isEmpty()}">No hay habitats</h2>
-        <div class="container-md py-4 contenedor-card" th:if="${!listaHabitats.isEmpty()}">
-            <div class="col-sm contend-cards px-2" th:each="habitats : ${listaHabitats}">
+        <h2 >No hay especies para eliminar</h2>
+        <div class="container-md py-4 contenedor-card" >
+            <div class="col-sm contend-cards px-2" >
                 <div class="card w-100 card-border mb-5">
                     <img th:src="@{/images/habitat-default.jpg}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${habitats.nombre}"></h5>
-                        <p class="card-text" th:text="${habitats.nombreClima}"></p>
-                        <p class="card-text" th:text="${habitats.nombreVegetacion}"></p>
+                        <h5 class="card-title" ></h5>
+                        <p class="card-text" ></p>
+                        <p class="card-text" ></p>
                     </div>
                     <div class="card-footer">
                         <a href="/eliminar_especie_habitat" class="btn btn-warning">Eliminar Especie</a>
