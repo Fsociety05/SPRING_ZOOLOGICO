@@ -7,10 +7,12 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
+import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import java.util.List;
@@ -44,6 +46,9 @@ public class ControladorGeneral {
 
     @Autowired
     private UsuarioServicios servicioUsuario;
+    
+    @Autowired
+    private IndiceVulnerabilidadServicios servicioIndice;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -152,7 +157,26 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
-
-
+        
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        IndiceVulnerabilidad tempInd = new IndiceVulnerabilidad();
+        IndiceVulnerabilidad tempInd2 = new IndiceVulnerabilidad();
+        IndiceVulnerabilidad tempInd3 = new IndiceVulnerabilidad();
+        
+        
+        tempInd.setNombre_indice("ALTO");
+        tempInd.setDescripcion("");
+        
+        tempInd2.setNombre_indice("MEDIO");
+        tempInd2.setDescripcion("");
+        
+        tempInd3.setNombre_indice("BAJO");
+        tempInd3.setDescripcion("");
+        
+        servicioIndice.guardar(tempInd);
+        servicioIndice.guardar(tempInd2);
+        servicioIndice.guardar(tempInd3);
+        
     }
 }
