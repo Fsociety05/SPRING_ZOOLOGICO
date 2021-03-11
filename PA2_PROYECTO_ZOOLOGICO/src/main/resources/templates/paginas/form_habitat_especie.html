@@ -77,21 +77,21 @@ and open the template in the editor.
             <h1>Agregando Especies a habitats</h1>
 
 
-            <form class="container">
+            <form class="container" action="#" th:action="@{/guardar_EspecieHabitat}" th:object="${objetoHabitadEspecie}" method="post">
 
                 <div class="container">
                     <label>Habitat</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option th:if="${lista_habitat.isEmpty()}" name="lista_habitat">Vacio</option>
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
+                        <option th:if="${lista_habitat.isEmpty()}" name="lista_habitat" th:value="0">Vacio</option>
                         <option th:!if="${lista_habitat.isEmpty()}" th:each="habitat : ${lista_habitat}" th:value="${habitat.id}" th:text="${habitat.nombre}" name="id_habitat"></option>
 
                     </select>
                 </div>
-
+                <input type="hidden" th:field="*{id}" name="id" id="id">
                 <div class="container">
                     <label>Especie</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option th:if="${lista_especie.isEmpty()}" name="lista_especie">Vacio</option>
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_especie}">
+                        <option th:if="${lista_especie.isEmpty()}" name="lista_especie" th:value="0">Vacio</option>
                         <option th:!if="${lista_especie.isEmpty()}" th:each="especie : ${lista_especie}" th:value="${especie.id}" th:text="${especie.nombreComun}" name="id_especie"></option>
 
                     </select>
@@ -99,12 +99,13 @@ and open the template in the editor.
 
                 <div class="container">
                     <label>Indice de vulnerabilidad</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option th:if="${lista_vulnerabilidad.isEmpty()}"  name="id_vulnerabilidad">Vacio</option>
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_vulnerabilidad}">
+                        <option th:if="${lista_vulnerabilidad.isEmpty()}"  name="id_vulnerabilidad" th:value="0">Vacio</option>
                         <option th:!if="${lista_vulnerabilidad.isEmpty()}" th:each="vulnerabilidad : ${lista_vulnerabilidad}" th:value="${vulnerabilidad.id}" th:text="${vulnerabilidad.nombre_indice}" name="id_vulnerabilidad"></option>
 
                     </select>
                 </div>
+                
                 <div class="container" style=" margin-top: 10px">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
@@ -113,6 +114,15 @@ and open the template in the editor.
 
 
         </div>
+        
+            <div class="alert alert-success alert-dismissable" th:if="${success != null}">
+                <label th:text="${success}"></label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                <label th:text="${error}"></label>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
 
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>

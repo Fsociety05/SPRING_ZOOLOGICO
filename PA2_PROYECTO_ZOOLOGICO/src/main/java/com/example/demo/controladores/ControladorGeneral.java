@@ -7,6 +7,7 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.Vegetacion;
 import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
@@ -15,6 +16,7 @@ import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
+import com.example.demo.servicios.VegetacionServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,9 @@ public class ControladorGeneral {
     
     @Autowired
     private IndiceVulnerabilidadServicios servicioIndice;
+    
+    @Autowired
+    private VegetacionServicio servicioVegetacion;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -177,6 +182,13 @@ public class ControladorGeneral {
         servicioIndice.guardar(tempInd);
         servicioIndice.guardar(tempInd2);
         servicioIndice.guardar(tempInd3);
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         
+        Vegetacion tempVege = new Vegetacion();
+        
+        tempVege.setNombre("Selva húmeda");
+        tempVege.setDescripcion("Prueba");
+        
+        servicioVegetacion.guardar(tempVege);
     }
 }
