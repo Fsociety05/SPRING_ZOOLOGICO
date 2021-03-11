@@ -5,8 +5,8 @@
  */
 package com.example.demo.servicios;
 
-import com.example.demo.modelos.Habitats;
-import com.example.demo.repositorios.HabitatsRepositorio;
+import com.example.demo.modelos.Itinerario;
+import com.example.demo.repositorios.ItinerarioRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
  * @author Licona
  */
 @Service
-public class HabitatsServicios {
+public class ItinerarioServicios {
     
     @Autowired
-    private HabitatsRepositorio repositorio;
+    private ItinerarioRepositorio repositorio;
     
-    public Habitats guardar(Habitats entidad) {
+    public Itinerario guardar(Itinerario entidad) {
         return repositorio.save(entidad);
     }
 
@@ -30,15 +30,12 @@ public class HabitatsServicios {
         repositorio.deleteById(id);
     }
     
-    public Optional<Habitats> getValor(Long id) {
+    public Optional<Itinerario> getValor(Long id) {
         return repositorio.findById(id);
     }
     
-    public List<Habitats> getTodos() {
-        return (List<Habitats>) repositorio.findAll();
+    public List<Itinerario> getTodos() {
+        return (List<Itinerario>) repositorio.findAll();
     }
     
-    public Habitats getUno(Long id) {
-        return repositorio.findById(id).get();
-    }
 }
