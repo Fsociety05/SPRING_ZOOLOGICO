@@ -75,7 +75,7 @@ and open the template in the editor.
         <div class="container mt-4">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/irHabitats">Mantenimiento Habitats</a>
+                    <a class="nav-link active" aria-current="page" href="/mantenimiento_habitats">Mantenimiento Habitats</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page">Registrar Habitats</a>
@@ -99,9 +99,9 @@ and open the template in the editor.
                         <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${clima.nombre}" th:text="${clima.nombre}" name="nombreClima"></option>
                     </select>
                     <label for="nombreVegetacion" class="form-label">Vegetacion</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{nombreVegetacion}">
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_vegetacion}">
                         <option th:if="${listaVegetaciones.isEmpty()}" value="0">No hay vegetacion</option>
-                        <option th:!if="${listaVegetaciones.isEmpty()}" th:each="vegetacionn : ${listaVegetaciones}" th:value="${vegetacionn.nombre}" th:text="${vegetacionn.nombre}" name="nombreVegetacion"></option>
+                        <option th:!if="${listaVegetaciones.isEmpty()}" th:each="vegetacionn : ${listaVegetaciones}" th:value="${vegetacionn.id}" th:text="${vegetacionn.nombre}" name="nombreVegetacion"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>
