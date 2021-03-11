@@ -96,6 +96,26 @@ and open the template in the editor.
                     <input type="text" class="form-control" id="contrasenia" th:field="*{contrasenia}" name="contrasenia">
                 </div>
                 <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" name="nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellido" th:field="*{apellido}" name="apellido">
+                </div>
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" th:field="*{dni}" name="dni">
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input type="text" class="form-control" id="telefono" th:field="*{telefono}" name="telefono">
+                </div>
+                <div class="mb-3">
+                    <label for="correo" class="form-label">Correo</label>
+                    <input type="email" class="form-control" id="correo" th:field="*{correo}" name="correo">
+                </div>
+                <div class="mb-3">
                     <label for="Roles" class="form-label">Rol</label>
                     <select class="form-select" aria-label="Default select example" th:field="*{id_rol}">
                         <option th:if="${lista_rol.isEmpty()}" value="0">No hay roles</option>

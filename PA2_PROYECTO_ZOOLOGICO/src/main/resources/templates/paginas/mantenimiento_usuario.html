@@ -115,6 +115,8 @@ and open the template in the editor.
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Usuario</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
                                 <th scope="col">Rol</th>
                                 <th scope="col">Acciones</th>
                                 <th scope="col"></th>
@@ -124,7 +126,8 @@ and open the template in the editor.
                             <tr th:each="usuario : ${lista_usuario}">
                                 <td th:text="${usuario.id}"></td>
                                 <td th:text="${usuario.nom_usuario}"></td>
-
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.apellido}"></td>
                                 <!--<td th:text="${usuario.id_rol}"></td>-->
                                 <td th:if="${usuario.id_rol==1}" th:text="ADMINISTRADOR"></td>
                                 <td th:if="${usuario.id_rol==2}" th:text="EMPLEADO"></td>
