@@ -7,10 +7,12 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
+import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import java.util.List;
@@ -35,6 +37,9 @@ public class ControladorGeneral {
 //////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
+    
+    @Autowired
+    private HabitatsServicios servicioHabitat;
     
     @Autowired
     private ClimaServicios servicioClima;
@@ -152,7 +157,5 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
-
-
     }
 }

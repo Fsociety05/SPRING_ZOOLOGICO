@@ -75,14 +75,13 @@ and open the template in the editor.
         <div class="container mt-4">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/mantenimiento_habitats">Mantenimiento Habitats</a>
+                    <a class="nav-link active" aria-current="page" href="/mantenimiento_itinerario">Mantenimiento Habitats</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page">Registrar Habitats</a>
                 </li>
             </ul>
         </div>
-
 
         <div class="container mt-4">
             <form action="#" th:action="@{/guardarItinerario}" th:object="${itinerario}" method="post">
@@ -105,13 +104,13 @@ and open the template in the editor.
                 </div>
                 <div class="mb-3">
                     <label for="numeroVisitantes" class="form-label">Numero Visitantes</label>
-                    <input class="form-control" type="number" id="numeroVisitantes" th:field="*{numeroVisitantes}" name="numeroVisitantes">
+                    <input class="form-control" type="number" id="numeroVisitantes" th:field="*{numeroVisitantes}" min="1" name="numeroVisitantes">
                 </div>
                 <div class="mb-3">
-                    <label for="nombreClima" class="form-label">Rol</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{nombreClima}">
-                        <option th:if="${lista_clima.isEmpty()}" value="0">No hay climas</option>
-                        <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${clima.nombre}" th:text="${clima.nombre}" name="nombreClima"></option>
+                    <label for="nombreHabitat" class="form-label">Habitat</label>
+                    <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
+                        <option th:if="${lista_habitat_combo.isEmpty()}" value="0">No hay Habitat</option>
+                        <option th:!if="${lista_habitat_combo.isEmpty()}" th:each="habitatt : ${lista_habitat_combo}" th:value="${habitatt.id}" th:text="${habitatt.nombre}" name="nombreHabitat"></option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Guardar</button>

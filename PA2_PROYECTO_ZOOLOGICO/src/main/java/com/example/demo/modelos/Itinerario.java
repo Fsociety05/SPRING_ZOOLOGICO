@@ -25,7 +25,7 @@ public class Itinerario implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idItinerario;
+    private Long id;
     private String nombre;
     private String horaIncio;
     private String horaFin;

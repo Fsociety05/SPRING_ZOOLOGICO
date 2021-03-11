@@ -9,7 +9,7 @@ import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Itinerario;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.ItinerarioServicios;
-import com.example.demo.servicios.VegetacionServicio;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,34 +31,36 @@ public class ItinerarioUIControlador {
     @Autowired
     private HabitatsServicios servicioHabitat;
 
-
     @RequestMapping("/mantenimiento_itinerario")
     public String irMantenimiento(Model model) {
-        
-        Itinerario[] arreglo = new Itinerario[servicio.getTodos().size()];
-        int i = 0;
-        for (Itinerario itinerario : servicio.getTodos()) {
-            arreglo[i] = itinerario;
-            i++;
-        }
-        
-        for (int j = 0; j < arreglo.length; j++) {
-            arreglo[j].setNombreHabitat(servicioHabitat.getUno(arreglo[j].getId_habitat()).getNombre()+"");
-        }
-        
+        verificacion();
         setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/mantenimiento_itinerario";
     }
 
     @RequestMapping("/vista_itinerario")
     public String vista(Model model) {
-        setParametro(model, "listaItinerario", servicio.getTodos());
+        verificacion();
+        setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/vista_Itinerario";
+    }
+    
+    private void verificacion() {
+        Itinerario[] arreglo = new Itinerario[servicio.getTodos().size()];
+        int i = 0;
+        for (Itinerario itinerario : servicio.getTodos()) {
+            arreglo[i] = itinerario;
+            i++;
+        }
+
+        for (int j = 0; j < arreglo.length; j++) {
+            arreglo[j].setNombreHabitat(servicioHabitat.getUno(arreglo[j].getId_habitat()).getNombre() + "");
+        }
     }
 
     @GetMapping("/crear_itinerario")
     public String irCrear_itinerario(Model model) {
-        setParametro(model, "itinerario", new Habitats());
+        setParametro(model, "itinerario", new Itinerario());
         setParametro(model, "lista_habitat_combo", servicioHabitat.getTodos());
         return "paginas/formItinerario";
     }

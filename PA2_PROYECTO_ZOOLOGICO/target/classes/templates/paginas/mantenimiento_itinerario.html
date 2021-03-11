@@ -75,37 +75,43 @@ and open the template in the editor.
         <div class="container mt-4">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page">Mantenimiento Habitats</a>
+                    <a class="nav-link" aria-current="page">Mantenimiento Itinerario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/crear_habitats">Registrar Habitats</a>
+                    <a class="nav-link active" aria-current="page" href="/crear_itinerario">Registrar Itinerarios</a>
                 </li>
             </ul>
         </div>
 
         <div class="container mt-5">
-            <h2 th:if="${lista_Habitats.isEmpty()}">No hay Habitats</h2>
-            <div class="container" th:if="${!lista_Habitats.isEmpty()}">
+            <h2 th:if="${lista_Itinerario.isEmpty()}">No hay Itinerario</h2>
+            <div class="container" th:if="${!lista_Itinerario.isEmpty()}">
                 <div class="table-responsive">
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Clima</th>
-                                <th scope="col">Vegetacion</th>
+                                <th scope="col">Hora Inicio</th>
+                                <th scope="col">Hora Fin</th>
+                                <th scope="col">Area</th>
+                                <th scope="col">Numero Visitantes</th>
+                                <th scope="col">Habitat</th>
                                 <th scope="col">Acciones</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="habitats : ${lista_Habitats}">
-                                <td th:text="${habitats.id}"></td>
-                                <td th:text="${habitats.nombre}"></td>
-                                <td th:text="${habitats.nombreClima}"></td>
-                                <td th:text="${habitats.nombreVegetacion}"></td>
-                                <td><a th:href="@{/actualizarHabitats/{id} (id=${habitats.id})}"><img width="40px" th:src="@{/images/editar.png}"></a></a></td>
-                                <td><a th:href="@{/eliminarHabitats/{id} (id=${habitats.id})}"><img width="40px" th:src="@{/images/eliminar.png}"></a></td>
+                            <tr th:each="itinerario : ${lista_Itinerario}">
+                                <td th:text="${itinerario.id}"></td>
+                                <td th:text="${itinerario.nombre}"></td>
+                                <td th:text="${itinerario.horaIncio}"></td>
+                                <td th:text="${itinerario.horaFin}"></td>
+                                <td th:text="${itinerario.area}"></td>
+                                <td th:text="${itinerario.numeroVisitantes}"></td>
+                                <td th:text="${itinerario.nombreHabitat}"></td>
+                                <td><a th:href="@{/actualizarItinerario/{id} (id=${itinerario.id})}"><img width="40px" th:src="@{/images/editar.png}"></a></a></td>
+                                <td><a th:href="@{/eliminarItinerario/{id} (id=${itinerario.id})}"><img width="40px" th:src="@{/images/eliminar.png}"></a></td>
                             </tr>
                         </tbody>
                     </table>

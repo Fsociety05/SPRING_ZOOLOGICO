@@ -72,21 +72,22 @@ and open the template in the editor.
             </div>
         </nav>
         <div class="container mt-4 barra-titulo">
-            <a href="/mantenimiento_especie">Inicio</a>
-            / Vista de Hábitats
+            <a href="/inicio">Inicio</a>
+            / Vista de Itinerarios
         </div>
-        <h2 th:if="${listaHabitats.isEmpty()}">No hay habitats</h2>
-        <div class="container-md py-4 contenedor-card" th:if="${!listaHabitats.isEmpty()}">
-            <div class="col-sm contend-cards px-2" th:each="habitats : ${listaHabitats}">
+        <div class="container mt-4">
+            <h2 th:if="${lista_Itinerario.isEmpty()}">No hay itinerarios</h2>
+        </div>
+        <div class="container-md py-4 contenedor-card" th:if="${!lista_Itinerario.isEmpty()}">
+            <div class="col-sm contend-cards px-2" th:each="itinerarios : ${lista_Itinerario}">
                 <div class="card w-100 card-border mb-5">
                     <img th:src="@{/images/habitat-default.jpg}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${habitats.nombre}"></h5>
-                        <p class="card-text" th:text="${habitats.nombreClima}"></p>
-                        <p class="card-text" th:text="${habitats.nombreVegetacion}"></p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="/eliminar_especie_habitat" class="btn btn-warning">Eliminar Especie</a>
+                        <h5 class="card-title" th:text="${itinerarios.nombre}"></h5>
+                        <p class="card-text" th:text="${'Horario: '+itinerarios.horaIncio+' - '+itinerarios.horaFin}"></p>
+                        <p class="card-text" th:text="${'Area: '+itinerarios.area}"></p>
+                        <p class="card-text" th:text="${'Numero Visitantes: '+itinerarios.numeroVisitantes}"></p>
+                        <p class="card-text" th:text="${itinerarios.nombreHabitat}"></p>
                     </div>
                 </div>
             </div>
