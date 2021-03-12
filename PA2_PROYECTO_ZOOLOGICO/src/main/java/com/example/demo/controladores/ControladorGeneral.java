@@ -93,7 +93,7 @@ public class ControladorGeneral {
                     usuario_logueado=temp;
                     return "redirect:/inicio";
                 }
-                
+                usuarioEncontrado = true;
             }
         }
         
@@ -180,8 +180,8 @@ public class ControladorGeneral {
 
         
         IndiceVulnerabilidad tempVulne3 = new IndiceVulnerabilidad();
-        tempVulne2.setNombre_indice("Alto");
-        tempVulne2.setDescripcion("");
+        tempVulne3.setNombre_indice("Alto");
+        tempVulne3.setDescripcion("");
         servicioIndice.guardar(tempVulne3);
 
 

@@ -153,7 +153,7 @@ public class HabitatsUIControlador {
         return "redirect:/mantenimiento_habitats";
     }
 
-    public void setParametro(Model model, String atributo, Object valor) {
+    public void setParametro(Model model, String atributo, Object valor) { 
         model.addAttribute(atributo, valor);
     }
 
