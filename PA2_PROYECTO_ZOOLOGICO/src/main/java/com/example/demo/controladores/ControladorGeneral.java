@@ -7,14 +7,18 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.Vegetacion;
+import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
+import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
+import com.example.demo.servicios.VegetacionServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +53,12 @@ public class ControladorGeneral {
 
     @Autowired
     private UsuarioServicios servicioUsuario;
+    
+    @Autowired
+    private IndiceVulnerabilidadServicios servicioIndice;
+    
+    @Autowired
+    private VegetacionServicio servicioVegetacion;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -83,7 +93,7 @@ public class ControladorGeneral {
                     usuario_logueado=temp;
                     return "redirect:/inicio";
                 }
-                
+                usuarioEncontrado = true;
             }
         }
         
@@ -157,5 +167,28 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        IndiceVulnerabilidad tempVulne = new IndiceVulnerabilidad();
+        tempVulne.setNombre_indice("Bajo");
+        tempVulne.setDescripcion("");
+        servicioIndice.guardar(tempVulne);
+        
+        IndiceVulnerabilidad tempVulne2 = new IndiceVulnerabilidad();
+        tempVulne2.setNombre_indice("Medio");
+        tempVulne2.setDescripcion("");
+        servicioIndice.guardar(tempVulne2);
+
+        
+        IndiceVulnerabilidad tempVulne3 = new IndiceVulnerabilidad();
+        tempVulne3.setNombre_indice("Alto");
+        tempVulne3.setDescripcion("");
+        servicioIndice.guardar(tempVulne3);
+
+
+///////////////////////////////////////////////////////////////////////////////
+        Vegetacion tempVege3 = new Vegetacion();
+        tempVege3.setNombre("Bosques de Sabana");
+        tempVege3.setDescripcion("regiones entre el desierto y el bosque tropical.");
+        servicioVegetacion.guardar(tempVege3);
     }
 }

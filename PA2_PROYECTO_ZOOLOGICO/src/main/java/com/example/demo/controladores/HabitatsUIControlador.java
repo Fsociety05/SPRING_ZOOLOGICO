@@ -5,10 +5,18 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.EspecieHabitat;
+import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Habitats;
+import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.servicios.ClimaServicios;
+import com.example.demo.servicios.EspecieHabitatServicios;
+import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.HabitatsServicios;
+import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.VegetacionServicio;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +34,15 @@ public class HabitatsUIControlador {
 
     @Autowired
     private HabitatsServicios servicio;
+    
+    @Autowired
+    private EspecieServicios servicioEspecie;
+    
+    @Autowired
+    private IndiceVulnerabilidadServicios servicioVulneravilidad;
+    
+    @Autowired
+    private EspecieHabitatServicios servicioEspecieHabitat;
 
     @Autowired
     private ClimaServicios servicioClima;
@@ -36,16 +53,16 @@ public class HabitatsUIControlador {
     @RequestMapping("/mantenimiento_habitats")
     public String irMantenimiento(Model model) {
         
-        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
-        int i = 0;
-        for (Habitats habitats : servicio.getTodos()) {
-            arreglo[i] = habitats;
-            i++;
-        }
-        
-        for (int j = 0; j < arreglo.length; j++) {
-            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
-        }
+//        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
+//        int i = 0;
+//        for (Habitats habitats : servicio.getTodos()) {
+//            arreglo[i] = habitats;
+//            i++;
+//        }
+//        
+//        for (int j = 0; j < arreglo.length; j++) {
+//            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
+//        }
         
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
@@ -57,10 +74,52 @@ public class HabitatsUIControlador {
         return "paginas/vista_habitats";
     }
     
-    @RequestMapping("/eliminar_especie_habitat")
-    public String vistaEliminarEspecie() {
+    @GetMapping("/eliminarEspecieHabitats/{id}/{id_especie}")
+    public String vistaEliminarEspecie(@PathVariable("id") Long id_habitat,@PathVariable("id_especie") Long id_especie, Model modelo) {
         //setParametro(model, "listaHabitats", servicio.getTodos());
-        return "paginas/eliminar_especie_habitat";
+        
+        //System.out.println("Id especie="+id_especie+" id habitat="+id_habitat);
+        
+        List<Especies> tempEspecie = new ArrayList<>();
+       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
+        
+       
+        
+        for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id_habitat)) {
+            
+            if(especieHabitat.getId_especie()==id_especie){
+                servicioEspecieHabitat.eliminar(especieHabitat.getId());
+            }else{
+                tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
+            }
+            
+        }
+        
+        setParametro(modelo, "listaEspecies", tempEspecie);
+        setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
+        setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id_habitat)); //se agregan los roles al combobox
+        
+        
+        return "paginas/ver_especie_habitat";
+    }
+    
+    @GetMapping("/verEspecieHabitats/{id}")
+    public String verEspeciesEnHabitat(@PathVariable("id") Long id, Model modelo) {
+        
+        List<Especies> tempEspecie = new ArrayList<>();
+       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
+        
+        
+        for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id)) {
+            tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
+        }
+        
+        setParametro(modelo, "listaEspecies", tempEspecie);
+        setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
+        setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id)); //se agregan los roles al combobox
+        
+        System.out.println(id);
+        return "paginas/ver_especie_habitat";
     }
 
     @GetMapping("/crear_habitats")
@@ -81,6 +140,9 @@ public class HabitatsUIControlador {
 
     @PostMapping("/guardarHabitats")
     public String guardar(Habitats habitats, Model model) {
+        
+        habitats.setNombreVegetacion(servicioVegetacion.getValor(habitats.getId_vegetacion()).get().getNombre());
+        
         servicio.guardar(habitats);
         return "redirect:/mantenimiento_habitats";
     }
@@ -91,7 +153,7 @@ public class HabitatsUIControlador {
         return "redirect:/mantenimiento_habitats";
     }
 
-    public void setParametro(Model model, String atributo, Object valor) {
+    public void setParametro(Model model, String atributo, Object valor) { 
         model.addAttribute(atributo, valor);
     }
 

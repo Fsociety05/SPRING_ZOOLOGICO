@@ -28,36 +28,37 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 public class EspecieUIControlador {
+
     private String nomFoto = "null";
-    
+
     @Autowired
-    private EspecieServicios servicio;  
-    
+    private EspecieServicios servicio;
+
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model) {
         setParametro(model, "lista", servicio.getTodos());
         return "paginas/mantenimiento_especies";
     }
-    
+
     @RequestMapping("/vista_especie")
     public String vista(Model model) {
         setParametro(model, "lista", servicio.getTodos());
         return "paginas/vista_especie";
     }
-    
+
     @GetMapping("/crear")
     public String irCrear(Model model) {
         setParametro(model, "especie", new Especies());
         return "paginas/form_especies";
     }
-    
+
     @GetMapping("/actualizar/{id}")
-    public String irActualizar(@PathVariable("id") Long id, Model modelo){
+    public String irActualizar(@PathVariable("id") Long id, Model modelo) {
         nomFoto = servicio.getValor(id).get().getFoto();
         setParametro(modelo, "especie", servicio.getValor(id));
         return "paginas/form_especies";
     }
-    
+
 //    @GetMapping("/Generar")
 //    public String irGenerar() {
 //       Especies tem =new Especies();
@@ -68,8 +69,6 @@ public class EspecieUIControlador {
 //        servicio.guardar(tem);
 //        return "redirect:/mantenimiento_especie";
 //    }
-    
-    
     @PostMapping("/guardar")
     public String guardar(@RequestParam("foto1") MultipartFile file, Especies especie, Model model) {
 
@@ -86,32 +85,32 @@ public class EspecieUIControlador {
                 especie.setFoto("/images/" + file.getOriginalFilename());
 
             } else {
-               //if(editando){
-                   
-                   if(nomFoto.equals("null")){
-                       especie.setFoto("/images/defecto.png");
-                   }else{
-                       especie.setFoto(nomFoto);
-                   }
-                   
-               //}
+                //if(editando){
+
+                if (nomFoto.equals("null")) {
+                    especie.setFoto("/images/defecto.png");
+                } else {
+                    especie.setFoto(nomFoto);
+                }
+
+                //}
             }
 
         } catch (Exception e) {
-            System.out.println("error en guardado "+e.getMessage());
+            System.out.println("error en guardado " + e.getMessage());
             especie.setFoto("/images/defecto.png");
         }
 
         servicio.guardar(especie);
-        nomFoto="null";
-        return "redirect:/mantenimiento_especie"; 
+        nomFoto = "null";
+        return "redirect:/mantenimiento_especie";
     }
-    
-    public void setParametro(Model model, String atributo, Object valor){
+
+    public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
     }
-    
-     @GetMapping("eliminar/{id}")
+
+    @GetMapping("eliminar/{id}")
     public String eliminar(@PathVariable("id") Long id, Model modelo) {
 
         try {
@@ -119,7 +118,7 @@ public class EspecieUIControlador {
 
             //System.out.println(retornaNombre(temp.getFoto()));
             if (!retornaNombre(temp.getFoto()).equals("defecto.png")) {
-                File imagen = new File("src\\main\\resources\\static\\images\\"+retornaNombre(temp.getFoto()));
+                File imagen = new File("src\\main\\resources\\static\\images\\" + retornaNombre(temp.getFoto()));
                 FileInputStream readImage = new FileInputStream(imagen);
 
                 readImage.close();
@@ -133,6 +132,7 @@ public class EspecieUIControlador {
         return "redirect:/mantenimiento_especie";
     }
 //////////////////////////////////////////////////////////////////////////////////////////////
+
     private String retornaNombre(String url) {
         String nombre = "";
         int num_plecas = 2;
@@ -151,7 +151,5 @@ public class EspecieUIControlador {
 
         return nombre;
     }
-    
-    
-    
+
 }
