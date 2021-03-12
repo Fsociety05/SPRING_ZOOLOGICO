@@ -56,6 +56,12 @@ public class HabitatsUIControlador {
         setParametro(model, "listaHabitats", servicio.getTodos());
         return "paginas/vista_habitats";
     }
+    
+    @RequestMapping("/eliminar_especie_habitat")
+    public String vistaEliminarEspecie() {
+        //setParametro(model, "listaHabitats", servicio.getTodos());
+        return "paginas/eliminar_especie_habitat";
+    }
 
     @GetMapping("/crear_habitats")
     public String irCrear_usuario(Model model) {
@@ -89,14 +95,4 @@ public class HabitatsUIControlador {
         model.addAttribute(atributo, valor);
     }
 
-    private Habitats[] redefinir(Habitats arr[]) {
-        Habitats temp[] = new Habitats[arr.length + 1];
-
-        for (int i = 0; i < arr.length; i++) {
-
-            temp[i] = arr[i];
-        }
-
-        return temp;
-    }
 }

@@ -72,7 +72,7 @@ and open the template in the editor.
             </div>
         </nav>
         <div class="container mt-4 barra-titulo">
-            <a href="/mantenimiento_especie">Inicio</a>
+            <a href="/inicio">Inicio</a>
             / Vista de Hábitats
         </div>
         <h2 th:if="${listaHabitats.isEmpty()}">No hay habitats</h2>
@@ -84,6 +84,9 @@ and open the template in the editor.
                         <h5 class="card-title" th:text="${habitats.nombre}"></h5>
                         <p class="card-text" th:text="${habitats.nombreClima}"></p>
                         <p class="card-text" th:text="${habitats.nombreVegetacion}"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/eliminar_especie_habitat" class="btn btn-warning">Eliminar Especie</a>
                     </div>
                 </div>
             </div>
