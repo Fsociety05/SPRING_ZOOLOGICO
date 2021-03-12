@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -30,12 +31,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class EspecieUIControlador {
 
     private String nomFoto = "null";
+    private boolean editando = false;
 
     @Autowired
     private EspecieServicios servicio;
 
     @RequestMapping("/mantenimiento_especie")
-    public String irMantenimiento(Model model) {
+    public String irMantenimiento(Model model, RedirectAttributes attribute) {
         setParametro(model, "lista", servicio.getTodos());
         return "paginas/mantenimiento_especies";
     }
@@ -56,21 +58,51 @@ public class EspecieUIControlador {
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
         nomFoto = servicio.getValor(id).get().getFoto();
         setParametro(modelo, "especie", servicio.getValor(id));
+        editando = true;
         return "paginas/form_especies";
     }
 
-//    @GetMapping("/Generar")
-//    public String irGenerar() {
-//       Especies tem =new Especies();
-//        tem.setNombreComun("Especie generada");
-//        tem.setDescripcion("esta es una descripcion por defecto");
-//        tem.setFoto("/images/defecto.png");
-//        
-//        servicio.guardar(tem);
-//        return "redirect:/mantenimiento_especie";
-//    }
     @PostMapping("/guardar")
-    public String guardar(@RequestParam("foto1") MultipartFile file, Especies especie, Model model) {
+    public String guardar(@RequestParam("foto1") MultipartFile file, Especies especie, Model model, RedirectAttributes attribute) {
+
+        for (Especies todo : servicio.getTodos()) {
+            if (editando) {
+                if (todo.getNombreComun().equals(especie.getNombreComun())) {
+                    if (todo.getId() == especie.getId()) {
+
+                    } else {
+                        editando = false;
+                        attribute.addFlashAttribute("error", "Nombre comun ya registrado");
+                        return "redirect:/mantenimiento_especie";
+                    }
+
+                }
+
+                if (todo.getNombreCientifico().equals(especie.getNombreCientifico())) {
+
+                    if (todo.getId() == especie.getId()) {
+
+                    } else {
+                        editando = false;
+                        attribute.addFlashAttribute("error", "Nombre cientifico ya registrado");
+                        return "redirect:/mantenimiento_especie";
+                    }
+
+                }
+            } else {
+                if (todo.getNombreComun().equals(especie.getNombreComun())) {
+                    attribute.addFlashAttribute("error", "Nombre comun ya registrado");
+                    return "redirect:/crear";
+                }
+
+                if (todo.getNombreCientifico().equals(especie.getNombreCientifico())) {
+                    attribute.addFlashAttribute("error", "Nombre cientifico ya registrado");
+                    return "redirect:/crear";
+                }
+            }
+        }
+
+        editando = false;
 
         Path direcctorioImagenes = Paths.get("src//main//resources//static/images");
 
@@ -103,7 +135,10 @@ public class EspecieUIControlador {
 
         servicio.guardar(especie);
         nomFoto = "null";
-        return "redirect:/mantenimiento_especie";
+
+        attribute.addFlashAttribute("success", "Guargado Correctamente");
+
+        return "redirect:/crear";
     }
 
     public void setParametro(Model model, String atributo, Object valor) {
@@ -111,7 +146,7 @@ public class EspecieUIControlador {
     }
 
     @GetMapping("eliminar/{id}")
-    public String eliminar(@PathVariable("id") Long id, Model modelo) {
+    public String eliminar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
 
         try {
             Especies temp = servicio.getValor(id).get();
@@ -127,7 +162,7 @@ public class EspecieUIControlador {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        attribute.addFlashAttribute("error", "Eliminado correctamente");
         servicio.eliminar(id);
         return "redirect:/mantenimiento_especie";
     }
