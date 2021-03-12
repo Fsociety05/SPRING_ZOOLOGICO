@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -32,15 +33,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HabitatsUIControlador {
 
+    private boolean editando = false;
+
     @Autowired
     private HabitatsServicios servicio;
-    
+
     @Autowired
     private EspecieServicios servicioEspecie;
-    
+
     @Autowired
     private IndiceVulnerabilidadServicios servicioVulneravilidad;
-    
+
     @Autowired
     private EspecieHabitatServicios servicioEspecieHabitat;
 
@@ -51,19 +54,8 @@ public class HabitatsUIControlador {
     private VegetacionServicio servicioVegetacion;
 
     @RequestMapping("/mantenimiento_habitats")
-    public String irMantenimiento(Model model) {
-        
-//        Habitats[] arreglo = new Habitats[servicio.getTodos().size()];
-//        int i = 0;
-//        for (Habitats habitats : servicio.getTodos()) {
-//            arreglo[i] = habitats;
-//            i++;
-//        }
-//        
-//        for (int j = 0; j < arreglo.length; j++) {
-//            arreglo[j].setNombreVegetacion(servicioVegetacion.getUno(arreglo[j].getId_vegetacion()).getNombre()+"");
-//        }
-        
+    public String irMantenimiento(Model model, RedirectAttributes attribute) {
+
         setParametro(model, "lista_Habitats", servicio.getTodos());
         return "paginas/mantenimiento_habitats";
     }
@@ -73,51 +65,43 @@ public class HabitatsUIControlador {
         setParametro(model, "listaHabitats", servicio.getTodos());
         return "paginas/vista_habitats";
     }
-    
+
     @GetMapping("/eliminarEspecieHabitats/{id}/{id_especie}")
-    public String vistaEliminarEspecie(@PathVariable("id") Long id_habitat,@PathVariable("id_especie") Long id_especie, Model modelo) {
-        //setParametro(model, "listaHabitats", servicio.getTodos());
-        
-        //System.out.println("Id especie="+id_especie+" id habitat="+id_habitat);
-        
+    public String vistaEliminarEspecie(@PathVariable("id") Long id_habitat, @PathVariable("id_especie") Long id_especie, Model modelo) {
+
         List<Especies> tempEspecie = new ArrayList<>();
-       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
-        
-       
-        
+
         for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id_habitat)) {
-            
-            if(especieHabitat.getId_especie()==id_especie){
+
+            if (especieHabitat.getId_especie() == id_especie) {
                 servicioEspecieHabitat.eliminar(especieHabitat.getId());
-            }else{
+            } else {
                 tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
             }
-            
+
         }
-        
+
         setParametro(modelo, "listaEspecies", tempEspecie);
         setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
         setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id_habitat)); //se agregan los roles al combobox
-        
-        
+
         return "paginas/ver_especie_habitat";
     }
-    
+
     @GetMapping("/verEspecieHabitats/{id}")
     public String verEspeciesEnHabitat(@PathVariable("id") Long id, Model modelo) {
-        
+
         List<Especies> tempEspecie = new ArrayList<>();
-       // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
-        
-        
+        // List<IndiceVulnerabilidad> tempVulneravilidad = servicioVulneravilidad.getTodos();
+
         for (EspecieHabitat especieHabitat : servicioEspecieHabitat.getPorHabitat(id)) {
             tempEspecie.add(servicioEspecie.getValor(especieHabitat.getId_especie()).get());
         }
-        
+
         setParametro(modelo, "listaEspecies", tempEspecie);
         setParametro(modelo, "listaVulnerabilidad", servicioVulneravilidad.getTodos());
         setParametro(modelo, "listaEspecieHabitat", servicioEspecieHabitat.getPorHabitat(id)); //se agregan los roles al combobox
-        
+
         System.out.println(id);
         return "paginas/ver_especie_habitat";
     }
@@ -132,6 +116,9 @@ public class HabitatsUIControlador {
 
     @GetMapping("/actualizarHabitats/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
+
+        editando = true;
+
         setParametro(modelo, "habitats", servicio.getValor(id));
         setParametro(modelo, "lista_clima", servicioClima.getTodos());
         setParametro(modelo, "listaVegetaciones", servicioVegetacion.getTodos()); //se agregan los roles al combobox
@@ -139,21 +126,45 @@ public class HabitatsUIControlador {
     }
 
     @PostMapping("/guardarHabitats")
-    public String guardar(Habitats habitats, Model model) {
-        
+    public String guardar(Habitats habitats, Model model, RedirectAttributes attribute) {
+
+        for (Habitats todo : servicio.getTodos()) {
+            if (editando) {
+                if (todo.getNombre().equals(habitats.getNombre())) {
+                    if (todo.getId() == habitats.getId()) {
+
+                    } else {
+                        editando = false;
+                        attribute.addFlashAttribute("error", "El nombre del habitats ya existe");
+                        return "redirect:/mantenimiento_habitats";
+                    }
+
+                }
+            } else {
+                if (todo.getNombre().equals(habitats.getNombre())) {
+                    editando = false;
+                    attribute.addFlashAttribute("error", "El nombre del habitats ya existe");
+                    return "redirect:/crear_habitats";
+                }
+            }
+
+        }
+        editando = false;
         habitats.setNombreVegetacion(servicioVegetacion.getValor(habitats.getId_vegetacion()).get().getNombre());
+        attribute.addFlashAttribute("success", "Guardado correctamente");
         
         servicio.guardar(habitats);
-        return "redirect:/mantenimiento_habitats";
+        return "redirect:/crear_habitats";
     }
 
     @GetMapping("eliminarHabitats/{id}")
-    public String eliminar(@PathVariable("id") Long id, Model modelo) {
+    public String eliminar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
         servicio.eliminar(id);
+        attribute.addFlashAttribute("success", "Eliminado correctamente");
         return "redirect:/mantenimiento_habitats";
     }
 
-    public void setParametro(Model model, String atributo, Object valor) { 
+    public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
     }
 

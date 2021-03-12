@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos_form_especieHabitat.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -72,57 +72,78 @@ and open the template in the editor.
             </div>
         </nav>
 
+        <div class="container mt-4 barra-titulo">
+            <a href="/inicio">Inicio</a>
+            / Habitat
+        </div>
 
-        <div class="container p-3 my-3 ">
-            <h1>Agregando Especies a habitats</h1>
 
-
-            <form class="container" action="#" th:action="@{/guardar_EspecieHabitat}" th:object="${objetoHabitadEspecie}" method="post">
-
-                <div class="container">
-                    <label>Habitat</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
-                        <option th:if="${lista_habitat.isEmpty()}" name="lista_habitat" th:value="0">Vacio</option>
-                        <option th:!if="${lista_habitat.isEmpty()}" th:each="habitat : ${lista_habitat}" th:value="${habitat.id}" th:text="${habitat.nombre}" name="id_habitat"></option>
-
-                    </select>
-                </div>
-                <input type="hidden" th:field="*{id}" name="id" id="id">
-                <div class="container">
-                    <label>Especie</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_especie}">
-                        <option th:if="${lista_especie.isEmpty()}" name="lista_especie" th:value="0">Vacio</option>
-                        <option th:!if="${lista_especie.isEmpty()}" th:each="especie : ${lista_especie}" th:value="${especie.id}" th:text="${especie.nombreComun}" name="id_especie"></option>
-
-                    </select>
+        <div class="contenedor_general">
+            <div class="container p-3 my-3 ">
+                <div class="container mt-4">
+                    <ul class="nav nav-tabs">
+                        <!--<li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/mantenimiento_itinerario">Mantenimiento Itinerario</a>
+                        </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page">Agregando Especie a un habitat</a>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="container">
-                    <label>Indice de vulnerabilidad</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_vulnerabilidad}">
-                        <option th:if="${lista_vulnerabilidad.isEmpty()}"  name="id_vulnerabilidad" th:value="0">Vacio</option>
-                        <option th:!if="${lista_vulnerabilidad.isEmpty()}" th:each="vulnerabilidad : ${lista_vulnerabilidad}" th:value="${vulnerabilidad.id}" th:text="${vulnerabilidad.nombre_indice}" name="id_vulnerabilidad"></option>
 
-                    </select>
+                <form class="container" action="#" th:action="@{/guardar_EspecieHabitat}" th:object="${objetoHabitadEspecie}" method="post">
+
+                    <div class="container">
+                        <label>Habitat</label>
+                        <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
+                            <option th:if="${lista_habitat.isEmpty()}" name="lista_habitat" th:value="0">Vacio</option>
+                            <option th:!if="${lista_habitat.isEmpty()}" th:each="habitat : ${lista_habitat}" th:value="${habitat.id}" th:text="${habitat.nombre}" name="id_habitat"></option>
+
+                        </select>
+                    </div>
+                    <input type="hidden" th:field="*{id}" name="id" id="id">
+                    <div class="container">
+                        <label>Especie</label>
+                        <select class="form-select" aria-label="Default select example" th:field="*{id_especie}">
+                            <option th:if="${lista_especie.isEmpty()}" name="lista_especie" th:value="0">Vacio</option>
+                            <option th:!if="${lista_especie.isEmpty()}" th:each="especie : ${lista_especie}" th:value="${especie.id}" th:text="${especie.nombreComun}" name="id_especie"></option>
+
+                        </select>
+                    </div>
+
+                    <div class="container">
+                        <label>Indice de vulnerabilidad</label>
+                        <select class="form-select" aria-label="Default select example" th:field="*{id_vulnerabilidad}">
+                            <option th:if="${lista_vulnerabilidad.isEmpty()}"  name="id_vulnerabilidad" th:value="0">Vacio</option>
+                            <option th:!if="${lista_vulnerabilidad.isEmpty()}" th:each="vulnerabilidad : ${lista_vulnerabilidad}" th:value="${vulnerabilidad.id}" th:text="${vulnerabilidad.nombre_indice}" name="id_vulnerabilidad"></option>
+
+                        </select>
+                    </div>
+
+                    <div class="container" style=" margin-top: 10px">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </form>
+
+                <div class="container" id="container_mensages">
+                    <!--MENSAJES-->
+                    <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                        <label th:text="${success}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                        <label th:text="${error}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
                 </div>
-                
-                <div class="container" style=" margin-top: 10px">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-
-            </form>
-
+            </div>
 
         </div>
-        
-            <div class="alert alert-success alert-dismissable" th:if="${success != null}">
-                <label th:text="${success}"></label>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
-                <label th:text="${error}"></label>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+
+
 
 
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
