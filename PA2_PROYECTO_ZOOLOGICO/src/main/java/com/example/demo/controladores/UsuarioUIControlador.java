@@ -24,6 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UsuarioUIControlador {
 
+    private boolean editando = false;
+
     @Autowired
     private UsuarioServicios servicio;
 
@@ -31,20 +33,20 @@ public class UsuarioUIControlador {
     private RolServicios servicioRol;
 
     @RequestMapping("/irUsuario")
-    public String irUsuario(Model model) {
+    public String irUsuario(Model model, RedirectAttributes attribute) {
         setParametro(model, "lista_usuario", servicio.getTodos());
 
         return "paginas/mantenimiento_usuario";
     }
 
     @RequestMapping("/mantenimiento_usuario")
-    public String irMantenimiento(Model model) {
+    public String irMantenimiento(Model model, RedirectAttributes attribute) {
         setParametro(model, "lista_usuario", servicio.getTodos());
         return "paginas/mantenimiento_usuario";
     }
 
     @GetMapping("/crear_usuario")
-    public String irCrear_usuario(Model model) {
+    public String irCrear_usuario(Model model, RedirectAttributes attribute) {
         setParametro(model, "registro", new Usuario());
         setParametro(model, "lista_rol", servicioRol.getTodos()); //se agregan los roles al combobox
         return "paginas/formUsuario";
@@ -53,27 +55,87 @@ public class UsuarioUIControlador {
     @PostMapping("/guardar_usuario")
     public String guardar(Usuario usuario, Model model, RedirectAttributes attribute) {
 
-        //System.out.println("Entro");
-        servicio.guardar(usuario);
+        for (Usuario todo : servicio.getTodos()) {
+            if (editando) {
+                if (todo.getId() == usuario.getId()) {
 
-        //System.out.println(usuario.toString());
+                } else {
+                    if (!todo.getNom_usuario().equalsIgnoreCase("admin")) {
+                        if (todo.getNom_usuario().equals(usuario.getNom_usuario())) {
+                            editando = false;
+                            attribute.addFlashAttribute("error", "El usuario no esta disponible kkkkk");
+                            return "redirect:/mantenimiento_usuario";
+                        }
+
+                        if (todo.getDni().equals(usuario.getDni())) {
+                            editando = false;
+                            attribute.addFlashAttribute("error", "El DNI ya esta en otro registro");
+                            return "redirect:/mantenimiento_usuario";
+                        }
+
+                        if (todo.getTelefono().equals(usuario.getTelefono())) {
+                            editando = false;
+                            attribute.addFlashAttribute("error", "El Telefono ya esta en otro registro");
+                            return "redirect:/mantenimiento_usuario";
+                        }
+
+                        if (todo.getCorreo().equals(usuario.getCorreo())) {
+                            editando = false;
+                            attribute.addFlashAttribute("error", "El Correo ya esta en otro registro");
+                            return "redirect:/mantenimiento_usuario";
+                        }
+                    }
+
+                }
+            } else {
+
+                if (todo.getNom_usuario().equals(usuario.getNom_usuario())) {
+                    attribute.addFlashAttribute("error", "El usuario no esta disponible");
+                    return "redirect:/crear_usuario";
+                }
+
+                if (!todo.getNom_usuario().equalsIgnoreCase("admin")) {
+                    if (todo.getDni().equals(usuario.getDni())) {
+                        attribute.addFlashAttribute("error", "El DNI ya esta en otro registro");
+                        return "redirect:/crear_usuario";
+                    }
+
+                    if (todo.getTelefono().equals(usuario.getTelefono())) {
+                        attribute.addFlashAttribute("error", "El Telefono ya esta en otro registro");
+                        return "redirect:/crear_usuario";
+                    }
+
+                    if (todo.getCorreo().equals(usuario.getCorreo())) {
+                        attribute.addFlashAttribute("error", "El Correo ya esta en otro registro");
+                        return "redirect:/crear_usuario";
+                    }
+                }
+
+            }
+        }
+
+        editando = false;
         attribute.addFlashAttribute("success", "Guardado correctamente"); //este es el mensage que quiero mostrar
+        servicio.guardar(usuario);
+        return "redirect:/crear_usuario";
 
-        return "redirect:/mantenimiento_usuario";
     }
 
     @GetMapping("/actualizar_usuario/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
 
         if (servicio.getValor(id).get().getId() == 1) {
-            
+
             attribute.addFlashAttribute("error", "Este usuario no se puede editar");
 
         } else {
+            editando = true;
             setParametro(modelo, "registro", servicio.getValor(id));//se pone el ojeto de la pagina del formulario
             setParametro(modelo, "lista_rol", servicioRol.getTodos()); //se agregan los roles al combobox
             return "paginas/formUsuario";
         }
+
+        editando = true;
         // System.out.println("registro");
         return "redirect:/mantenimiento_usuario";
     }

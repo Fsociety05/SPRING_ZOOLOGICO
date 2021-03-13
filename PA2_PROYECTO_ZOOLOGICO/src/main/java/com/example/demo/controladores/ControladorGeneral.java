@@ -150,6 +150,7 @@ public class ControladorGeneral {
         tempUser.setNom_usuario("admin");
         tempUser.setContrasenia("admin");
         tempUser.setId_rol(temp.getId());
+        tempUser.setDni("00");
         
         servicioUsuario.guardar(tempUser);
         Clima temClima1 = new Clima();
