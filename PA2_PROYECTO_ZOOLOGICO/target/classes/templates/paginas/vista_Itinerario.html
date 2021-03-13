@@ -76,7 +76,7 @@ and open the template in the editor.
             / Vista de Itinerarios
         </div>
         <div class="container mt-4">
-            <h2 th:if="${lista_Itinerario.isEmpty()}">No hay itinerarios</h2>
+            <h2 th:if="${lista_Itinerario.isEmpty()}" style="color: black;">No hay itinerarios</h2>
         </div>
         <div class="container-md py-4 contenedor-card" th:if="${!lista_Itinerario.isEmpty()}">
             <div class="col-sm contend-cards px-2" th:each="itinerarios : ${lista_Itinerario}">

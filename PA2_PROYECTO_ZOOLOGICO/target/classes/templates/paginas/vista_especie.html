@@ -71,13 +71,15 @@ and open the template in the editor.
                 </div>
             </div>
         </nav>
+        
         <div class="container mt-4 barra-titulo">
-            <a href="/mantenimiento_especie">Inicio</a>
-            / Registro de Especies
+            <a href="/inicio">Inicio</a>
+            / Vista Especies
+        </div>
+        <div class="container mt-4">
+            <h2 th:if="${lista.isEmpty()}" style="color: black;">No hay Especies</h2>
         </div>
         
-        
-        <h2 th:if="${lista.isEmpty()}">No hay especies</h2>
         <div class="container-md py-4 contenedor-card" th:if="${!lista.isEmpty()}">
             <div class="col-sm contend-cards px-2" th:each="especie : ${lista}">
                 <div class="card w-100 card-border mb-5">

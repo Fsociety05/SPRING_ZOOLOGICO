@@ -73,9 +73,11 @@ and open the template in the editor.
         </nav>
         <div class="container mt-4 barra-titulo">
             <a href="/inicio">Inicio</a>
-            / Vista de Hábitats
+            / Hábitats
         </div>
-        <h2 th:if="${listaHabitats.isEmpty()}">No hay habitats</h2>
+        <div class="container mt-4">
+            <h2 th:if="${listaHabitats.isEmpty()}" style="color: black;">No hay Habitats</h2>
+        </div>
         <div class="container-md py-4 contenedor-card" th:if="${!listaHabitats.isEmpty()}">
             <div class="col-sm contend-cards px-2" th:each="habitats : ${listaHabitats}">
                 <div class="card w-100 card-border mb-5">
