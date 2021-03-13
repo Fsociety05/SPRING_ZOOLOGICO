@@ -37,7 +37,7 @@ and open the template in the editor.
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/crear_itinerario" >Agregar Itinerario</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_itinerario" >Mantenimiento Itinerario</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_itinerario" th:if="${registro.id_rol==1}">Mantenimiento Itinerario</a></li>
                                 <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
                             </ul>
                         </li>

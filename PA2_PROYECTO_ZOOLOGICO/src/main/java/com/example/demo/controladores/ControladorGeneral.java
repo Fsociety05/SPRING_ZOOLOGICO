@@ -10,12 +10,14 @@ import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Vegetacion;
 import com.example.demo.modelos.IndiceVulnerabilidad;
 import com.example.demo.modelos.Habitats;
+import com.example.demo.modelos.Itinerario;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.HabitatsServicios;
+import com.example.demo.servicios.ItinerarioServicios;
 import com.example.demo.servicios.RolServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
@@ -37,7 +39,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ControladorGeneral {
 
     private boolean primerInicio = true;
-    private Usuario usuario_logueado;
+    Usuario usuario_logueado;
 //////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
@@ -59,6 +61,9 @@ public class ControladorGeneral {
     
     @Autowired
     private VegetacionServicio servicioVegetacion;
+    
+    @Autowired
+    private ItinerarioServicios servicioItinerario;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -111,6 +116,31 @@ public class ControladorGeneral {
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
     }
+    //////////////////////////////////////////////////////Intinerario
+    @GetMapping("/crear_itinerario")
+    public String irCrear_itinerario(Model model) {
+        setParametro(model, "itinerario", new Itinerario());
+        setParametro(model, "lista_habitat_combo", servicioHabitat.getTodos());
+        setParametro(model, "registro", usuario_logueado);
+        return "paginas/formItinerario";
+    }
+    
+    @RequestMapping("/mantenimiento_itinerario" )
+    public String irMantenimiento(Model model, RedirectAttributes attribute) {
+        //verificacion();
+        setParametro(model, "lista_Itinerario", servicioItinerario.getTodos());
+        setParametro(model, "registro", usuario_logueado);
+        return "paginas/mantenimiento_itinerario";
+    }
+
+    @RequestMapping("/vista_itinerario")
+    public String vista(Model model) {
+        //verificacion();
+        setParametro(model, "lista_Itinerario", servicioItinerario.getTodos());
+        setParametro(model, "registro", usuario_logueado);
+        return "paginas/vista_Itinerario";
+    }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
     private void cargarTablas() {
         Rol temp = new Rol();

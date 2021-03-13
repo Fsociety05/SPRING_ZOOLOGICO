@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioUIControlador {
 
     private boolean editando = false;
+    private Usuario UsuarioLogueado = null;
 
     @Autowired
     private UsuarioServicios servicio;
@@ -157,5 +158,19 @@ public class UsuarioUIControlador {
 
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
+    }
+    
+    public Usuario getParametroUsuario(Model model, String atributo) {
+        Usuario temp = (Usuario) model.getAttribute(atributo);
+        return temp;
+    }
+    
+    
+    public Usuario getUsuarioLogueado(){
+        return UsuarioLogueado;
+    }
+    
+    public void setUsuarioLogueado(Usuario user){
+        UsuarioLogueado = user;
     }
 }
