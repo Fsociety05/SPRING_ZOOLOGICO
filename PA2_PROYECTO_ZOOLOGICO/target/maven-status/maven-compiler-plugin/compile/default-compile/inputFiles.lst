@@ -1,3 +1,4 @@
+C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\ItinerarioRepositorio.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\servicios\EspecieServicios.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\modelos\IndiceVulnerabilidad.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\VegetacionRepositorio.java
@@ -5,8 +6,10 @@ C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\dem
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\modelos\EspecieHabitat.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\RolRepositorio.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\ClimaRepositorio.java
+C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\ItinerarioUIControlador.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\modelos\Especies.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\servicios\IndiceVulnerabilidadServicios.java
+C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\servicios\ItinerarioServicios.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\UsuarioRepositorio.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\modelos\Usuario.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\ControladorGeneral.java
@@ -23,6 +26,7 @@ C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\dem
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\UsuarioUIControlador.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\repositorios\EspecieRepositorio.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\servicios\RolServicios.java
+C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\modelos\Itinerario.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\HabitatEspecieUIControlador.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\ClimaUIControlador.java
 C:\RepoGit\SPRING_ZOOLOGICO\PA2_PROYECTO_ZOOLOGICO\src\main\java\com\example\demo\controladores\HabitatsUIControlador.java

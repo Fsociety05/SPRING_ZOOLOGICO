@@ -78,6 +78,18 @@ and open the template in the editor.
         </div>
 
         <div class="contenedor_general">
+            <div class="container" id="container_mensages">
+                <!--MENSAJES-->
+                <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                    <label th:text="${success}" class="label_mensaje"></label>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                    <label th:text="${error}" class="label_mensaje"></label>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            </div>
             <div class="container contenedor mt-4">
                 <form action="#" th:action="@{/guardar}" th:object="${especie}" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
@@ -104,16 +116,7 @@ and open the template in the editor.
                 </form>
             </div> 
             <div class="container" id="container_mensages">
-                <!--MENSAJES-->
-                <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
-                    <label th:text="${success}" class="label_mensaje"></label>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
-                    <label th:text="${error}" class="label_mensaje"></label>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-
+                
             </div>
         </div>
 

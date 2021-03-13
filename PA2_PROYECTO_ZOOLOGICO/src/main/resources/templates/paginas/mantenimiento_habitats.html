@@ -77,19 +77,8 @@ and open the template in the editor.
             <a href="/inicio">Inicio</a>
             / Habitat
         </div>
-        
-            <div class="container" id="container_mensages">
-                <!--MENSAJES-->
-                <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
-                    <label th:text="${success}" class="label_mensaje"></label>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
-                    <label th:text="${error}" class="label_mensaje"></label>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
 
-              </div>
+
         <div class="contenedor_general">
             <div class="container mt-4">
                 <ul class="nav nav-tabs">
@@ -100,6 +89,19 @@ and open the template in the editor.
                         <a class="nav-link active" aria-current="page" href="/crear_habitats">Registrar Habitats</a>
                     </li>-->
                 </ul>
+
+                <div class="container" id="container_mensages">
+                    <!--MENSAJES-->
+                    <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                        <label th:text="${success}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                        <label th:text="${error}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                </div>
             </div>
 
             <div class="container mt-5">
