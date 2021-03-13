@@ -75,7 +75,9 @@ and open the template in the editor.
             <a href="/inicio">Inicio</a>
             / Viendo Especies del Habitat
         </div>
-        <h2 th:if="${listaEspecies.isEmpty()}">No hay especies</h2>
+        <div class="container mt-4">
+            <h2 th:if="${listaEspecies.isEmpty()}" style="color: black;">No hay Especies</h2>
+        </div>
         <div class="container-md py-4 contenedor-card" th:if="${!listaEspecies.isEmpty()}">
             <div class="col-sm contend-cards px-2" th:each="especie : ${listaEspecies}">
                 <div class="card w-100 card-border mb-5">
