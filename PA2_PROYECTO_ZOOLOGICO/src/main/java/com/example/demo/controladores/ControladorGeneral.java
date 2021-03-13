@@ -13,12 +13,14 @@ import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Itinerario;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.ItinerarioServicios;
 import com.example.demo.servicios.RolServicios;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
 import java.util.List;
@@ -64,6 +66,9 @@ public class ControladorGeneral {
     
     @Autowired
     private ItinerarioServicios servicioItinerario;
+    
+    @Autowired
+    private UsuarioLogueadoServicios servicioUsuarioLogueado;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -72,7 +77,10 @@ public class ControladorGeneral {
             cargarTablas();
             primerInicio = false;
         }
-        
+            
+        for (UsuarioLogueado object : servicioUsuarioLogueado.getTodos()) {
+            servicioUsuarioLogueado.eliminar(object.getId());
+        }
          setParametro(model, "registro", new Usuario());
 
         return "index";
@@ -81,6 +89,12 @@ public class ControladorGeneral {
     @RequestMapping("/inicio")
     public String inicio(Model model) {
         setParametro(model, "registro", usuario_logueado);
+        
+        UsuarioLogueado temp = new UsuarioLogueado();
+        temp.setId(usuario_logueado.getId());
+        temp.setId_rol(usuario_logueado.getId_rol());
+        temp.setUsuario(usuario_logueado.getNom_usuario());
+        servicioUsuarioLogueado.guardar(temp);
 
         return "paginas/inicio";
     }
@@ -117,29 +131,7 @@ public class ControladorGeneral {
         model.addAttribute(atributo, valor);
     }
     //////////////////////////////////////////////////////Intinerario
-    @GetMapping("/crear_itinerario")
-    public String irCrear_itinerario(Model model) {
-        setParametro(model, "itinerario", new Itinerario());
-        setParametro(model, "lista_habitat_combo", servicioHabitat.getTodos());
-        setParametro(model, "registro", usuario_logueado);
-        return "paginas/formItinerario";
-    }
     
-    @RequestMapping("/mantenimiento_itinerario" )
-    public String irMantenimiento(Model model, RedirectAttributes attribute) {
-        //verificacion();
-        setParametro(model, "lista_Itinerario", servicioItinerario.getTodos());
-        setParametro(model, "registro", usuario_logueado);
-        return "paginas/mantenimiento_itinerario";
-    }
-
-    @RequestMapping("/vista_itinerario")
-    public String vista(Model model) {
-        //verificacion();
-        setParametro(model, "lista_Itinerario", servicioItinerario.getTodos());
-        setParametro(model, "registro", usuario_logueado);
-        return "paginas/vista_Itinerario";
-    }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
     private void cargarTablas() {
@@ -181,8 +173,16 @@ public class ControladorGeneral {
         tempUser.setContrasenia("admin");
         tempUser.setId_rol(temp.getId());
         tempUser.setDni("00");
-        
         servicioUsuario.guardar(tempUser);
+        
+        Usuario tempUser2 = new Usuario();
+        
+        tempUser2.setNom_usuario("Empleado");
+        tempUser2.setContrasenia("123");
+        tempUser2.setId_rol(temp2.getId());
+        tempUser2.setDni("00");
+        servicioUsuario.guardar(tempUser2);
+        
         Clima temClima1 = new Clima();
         Clima tempClima2 = new Clima();
         Clima tempClima3 = new Clima();

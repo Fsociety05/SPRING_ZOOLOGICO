@@ -16,7 +16,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+       <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -155,6 +155,8 @@ and open the template in the editor.
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
+                    
+                    <a th:if="${registro.id_rol==1}" href="/mantenimiento_itinerario" class="btn btn-warning">Ir a mantenimiento</a>
                 </form>
 
                 <div class="container" id="container_mensages"></div>
