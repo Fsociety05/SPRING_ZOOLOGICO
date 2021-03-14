@@ -6,7 +6,11 @@
 package com.example.demo.controladores;
 
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.EspecieServicios;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
+import com.example.demo.servicios.UsuarioServicios;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
@@ -35,21 +39,31 @@ public class EspecieUIControlador {
 
     @Autowired
     private EspecieServicios servicio;
+    
+    @Autowired
+    private UsuarioServicios serviciosUsuario;
+
+    @Autowired
+    private UsuarioLogueadoServicios serviciosUsuarioLogueado;
 
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model, RedirectAttributes attribute) {
+        
+        registrarUsuarioLogueado(model);
         setParametro(model, "lista", servicio.getTodos());
         return "paginas/mantenimiento_especies";
     }
 
     @RequestMapping("/vista_especie")
     public String vista(Model model) {
+        registrarUsuarioLogueado(model);
         setParametro(model, "lista", servicio.getTodos());
         return "paginas/vista_especie";
     }
 
     @GetMapping("/crear")
     public String irCrear(Model model) {
+        registrarUsuarioLogueado(model);
         setParametro(model, "especie", new Especies());
         return "paginas/form_especies";
     }
@@ -58,6 +72,7 @@ public class EspecieUIControlador {
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
         nomFoto = servicio.getValor(id).get().getFoto();
         setParametro(modelo, "especie", servicio.getValor(id));
+        registrarUsuarioLogueado(modelo);
         editando = true;
         return "paginas/form_especies";
     }
@@ -185,6 +200,19 @@ public class EspecieUIControlador {
         }
 
         return nombre;
+    }
+    
+    public void registrarUsuarioLogueado(Model model) {
+        Long id = null;
+        for (Usuario todo : serviciosUsuario.getTodos()) {
+            for (UsuarioLogueado object : serviciosUsuarioLogueado.getTodos()) {
+                if(todo.getId()==object.getId()){
+                    id = todo.getId();
+                }
+            }
+        }
+
+        setParametro(model, "registro", serviciosUsuario.getValor(id).get());
     }
 
 }

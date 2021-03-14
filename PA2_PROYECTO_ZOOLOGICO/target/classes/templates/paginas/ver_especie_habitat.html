@@ -24,20 +24,14 @@ and open the template in the editor.
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Especies
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Itinerario
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_especie" >Mantenimiento Especie</a></li>
-                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                                <li><a class="dropdown-item" href="/crear_itinerario" >Agregar Itinerario</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_itinerario" th:if="${registro.id_rol==1}">Mantenimiento Itinerario</a></li>
+                                <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -45,28 +39,53 @@ and open the template in the editor.
                                 Habitats
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear_habitats" >Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/crear_habitats" th:if="${registro.id_rol==1}">Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_habitats" th:if="${registro.id_rol==1}">Mantenimiento Habitát</a></li>
                                 <li><a class="dropdown-item" href="/vista_habitats" >Ver Habitáts</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_habitats" >Mantenimiento Habitát</a></li>
+                                <li><a class="dropdown-item" href="/habitat_especie" >Agregar especie a habitat</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Especies
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear" th:if="${registro.id_rol==1}">Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_especie" th:if="${registro.id_rol==1}">Mantenimiento Especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Vegetación
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crearVegetacion" >Agregar Vegetación</a></li>
-                                <li><a class="dropdown-item" href="/irVegetacion" >Mantenimiento Vegetacion</a></li>
+                                <li><a class="dropdown-item" href="/crearVegetacion" th:if="${registro.id_rol==1}">Agregar Vegetación</a></li>
+                                <li><a class="dropdown-item" href="/irVegetacion" th:if="${registro.id_rol==1}">Mantenimiento Vegetacion</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/irUsuario" th:if="${registro.id_rol==1}">Mantenimiento Usuario</a></li>
+                                <li><a class="dropdown-item" href="/crear_usuario" th:if="${registro.id_rol==1}">Agregar Usuario</a></li>
+                            </ul>
+                        </li>
+
+
+
+
                         <li class="nav-item">
-                            <a class="nav-link" href="/" style="color: white;">Salir</a>
+                            <a class="nav-link" href="/" style="color: white;">Cerrar sesi&oacute;n</a>
                         </li>
                     </ul>
 
-                    <span class="navbar-text" style="color: white;">
-                        Acompañanos
-                    </span>
+
                     <a class="navbar-brand" href="#"><img id="logo" th:src="@{/images/logo.png}" class="float-end" ></a>
                 </div>
             </div>
@@ -97,7 +116,7 @@ and open the template in the editor.
                     <div class="card-footer">
                         <div th:each="especieHabitat : ${listaEspecieHabitat}">
                             <div th:if="${especieHabitat.id_especie==especie.id}">
-                                <a th:href="@{/eliminarEspecieHabitats/{id}/{id_especie} (id=${especieHabitat.id_habitat},id_especie=${especie.id})}" class="btn btn-warning">Eliminar Especie</a>
+                                <a th:if="${registro.id_rol==1}" th:href="@{/eliminarEspecieHabitats/{id}/{id_especie} (id=${especieHabitat.id_habitat},id_especie=${especie.id})}" class="btn btn-warning">Eliminar Especie</a>
                             </div>
                         </div>
                     </div>

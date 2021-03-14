@@ -7,10 +7,13 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.EspecieHabitat;
 import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.EspecieHabitatServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
+import com.example.demo.servicios.UsuarioServicios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,10 +40,17 @@ public class HabitatEspecieUIControlador {
     @Autowired
     private EspecieHabitatServicios servicio;
     
+    @Autowired
+    private UsuarioServicios serviciosUsuario;
+
+    @Autowired
+    private UsuarioLogueadoServicios serviciosUsuarioLogueado;
     
     
     @RequestMapping("/habitat_especie")
     public String irMantenimiento(Model model) {
+        
+        registrarUsuarioLogueado(model);
         setParametro(model, "lista_vulnerabilidad", servicioVulnerabilidad.getTodos());
         setParametro(model, "lista_especie", serviciosEspecie.getTodos());
         setParametro(model, "lista_habitat", serviciosHabitat.getTodos());
@@ -83,6 +93,19 @@ public class HabitatEspecieUIControlador {
     
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
+    }
+    
+     public void registrarUsuarioLogueado(Model model) {
+        Long id = null;
+        for (Usuario todo : serviciosUsuario.getTodos()) {
+            for (UsuarioLogueado object : serviciosUsuarioLogueado.getTodos()) {
+                if(todo.getId()==object.getId()){
+                    id = todo.getId();
+                }
+            }
+        }
+
+        setParametro(model, "registro", serviciosUsuario.getValor(id).get());
     }
 
 }

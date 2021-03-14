@@ -5,7 +5,11 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.modelos.Vegetacion;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
+import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,15 +32,23 @@ public class VegetacionUIControlador {
     @Autowired
     private VegetacionServicio servicio;
 
+    @Autowired
+    private UsuarioServicios serviciosUsuario;
+
+    @Autowired
+    private UsuarioLogueadoServicios serviciosUsuarioLogueado;
+
     @RequestMapping("/irVegetacion")
     public String irMantenimiento(Model model, RedirectAttributes attribute) {
+        
+        registrarUsuarioLogueado(model);
         setParametro(model, "listaVegetacion", servicio.getTodos());
         return "paginas/mantenimiento_vegetacion";
     }
 
     @GetMapping("/crearVegetacion")
     public String irCrear(Model model) {
-        
+        registrarUsuarioLogueado(model);
         setParametro(model, "vegetacion", new Vegetacion());
         return "paginas/formVegetacion";
     }
@@ -48,6 +60,7 @@ public class VegetacionUIControlador {
     @GetMapping("/actualizarVegetacion/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
         editando = true;
+        registrarUsuarioLogueado(modelo);
         setParametro(modelo, "vegetacion", servicio.getValor(id));
         return "paginas/formVegetacion";
     }
@@ -88,5 +101,18 @@ public class VegetacionUIControlador {
         servicio.eliminar(id);
         attribute.addFlashAttribute("success", "Eliminado correctamente");
         return "redirect:/irVegetacion";
+    }
+
+    public void registrarUsuarioLogueado(Model model) {
+        Long id = null;
+        for (Usuario todo : serviciosUsuario.getTodos()) {
+            for (UsuarioLogueado object : serviciosUsuarioLogueado.getTodos()) {
+                if (todo.getId() == object.getId()) {
+                    id = todo.getId();
+                }
+            }
+        }
+
+        setParametro(model, "registro", serviciosUsuario.getValor(id).get());
     }
 }
