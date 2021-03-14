@@ -134,12 +134,12 @@ and open the template in the editor.
                     <div class="mb-3">
                         <label for="nombreClima" class="form-label">Clima</label>
                         <select class="form-select" aria-label="Default select example" th:field="*{nombreClima}">
-                            <option th:if="${lista_clima.isEmpty()}" value="0">No hay climas</option>
+                            <option th:if="${lista_clima.isEmpty()}" th:value="0">No hay climas</option>
                             <option th:!if="${lista_clima.isEmpty()}" th:each="clima : ${lista_clima}" th:value="${clima.nombre}" th:text="${clima.nombre}" name="nombreClima"></option>
                         </select>
                         <label for="nombreVegetacion" class="form-label">Vegetacion</label>
                         <select class="form-select" aria-label="Default select example" th:field="*{id_vegetacion}">
-                            <option th:if="${listaVegetaciones.isEmpty()}" value="0">No hay vegetacion</option>
+                            <option th:if="${listaVegetaciones.isEmpty()}" th:value="0">No hay vegetacion</option>
                             <option th:!if="${listaVegetaciones.isEmpty()}" th:each="vegetacionn : ${listaVegetaciones}" th:value="${vegetacionn.id}" th:text="${vegetacionn.nombre}" name="nombreVegetacion"></option>
                         </select>
                     </div>

@@ -5,9 +5,11 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.modelos.Vegetacion;
+import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.UsuarioLogueadoServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
@@ -38,9 +40,12 @@ public class VegetacionUIControlador {
     @Autowired
     private UsuarioLogueadoServicios serviciosUsuarioLogueado;
 
+    @Autowired
+    private HabitatsServicios servicioHabitat;
+
     @RequestMapping("/irVegetacion")
     public String irMantenimiento(Model model, RedirectAttributes attribute) {
-        
+
         registrarUsuarioLogueado(model);
         setParametro(model, "listaVegetacion", servicio.getTodos());
         return "paginas/mantenimiento_vegetacion";
@@ -82,7 +87,7 @@ public class VegetacionUIControlador {
                 }
             } else {
                 if (todo.getNombre().equals(vegetacion.getNombre())) {
-                    attribute.addFlashAttribute("success", "El nombre de la vegetacion ya existe");
+                    attribute.addFlashAttribute("error", "El nombre de la vegetacion ya existe");
                     return "redirect:/crearVegetacion";
                 }
             }
@@ -98,6 +103,14 @@ public class VegetacionUIControlador {
 
     @GetMapping("eliminarVegetacion/{id}")
     public String eliminar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
+
+        for (Habitats todo : servicioHabitat.getTodos()) {
+            if (todo.getId_vegetacion() == id) {
+                attribute.addFlashAttribute("error", "El registro no puede ser eliminado ya que se esta utilizando en un habitat");
+                return "redirect:/irVegetacion";
+            }
+        }
+
         servicio.eliminar(id);
         attribute.addFlashAttribute("success", "Eliminado correctamente");
         return "redirect:/irVegetacion";

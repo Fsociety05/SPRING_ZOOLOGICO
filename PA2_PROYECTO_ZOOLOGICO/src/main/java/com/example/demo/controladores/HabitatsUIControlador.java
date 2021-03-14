@@ -9,6 +9,7 @@ import com.example.demo.modelos.EspecieHabitat;
 import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.IndiceVulnerabilidad;
+import com.example.demo.modelos.Itinerario;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.ClimaServicios;
@@ -16,6 +17,7 @@ import com.example.demo.servicios.EspecieHabitatServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.IndiceVulnerabilidadServicios;
+import com.example.demo.servicios.ItinerarioServicios;
 import com.example.demo.servicios.UsuarioLogueadoServicios;
 import com.example.demo.servicios.UsuarioServicios;
 import com.example.demo.servicios.VegetacionServicio;
@@ -56,9 +58,12 @@ public class HabitatsUIControlador {
 
     @Autowired
     private VegetacionServicio servicioVegetacion;
-    
+
     @Autowired
     private UsuarioServicios serviciosUsuario;
+
+    @Autowired
+    private ItinerarioServicios serviciosItinerario;
 
     @Autowired
     private UsuarioLogueadoServicios serviciosUsuarioLogueado;
@@ -140,6 +145,18 @@ public class HabitatsUIControlador {
     @PostMapping("/guardarHabitats")
     public String guardar(Habitats habitats, Model model, RedirectAttributes attribute) {
 
+        if (habitats.getId_vegetacion() == 0) {
+            editando = false;
+            attribute.addFlashAttribute("error", "No hay una vegetacion seleccionada");
+            return "redirect:/crear_habitats";
+        }
+        
+//        if (habitats.getId_clima()== 0) {
+//            editando = false;
+//            attribute.addFlashAttribute("error", "No hay un clima seleccionado");
+//            return "redirect:/crear_habitats";
+//        }
+
         for (Habitats todo : servicio.getTodos()) {
             if (editando) {
                 if (todo.getNombre().equals(habitats.getNombre())) {
@@ -164,13 +181,21 @@ public class HabitatsUIControlador {
         editando = false;
         habitats.setNombreVegetacion(servicioVegetacion.getValor(habitats.getId_vegetacion()).get().getNombre());
         attribute.addFlashAttribute("success", "Guardado correctamente");
-        
+
         servicio.guardar(habitats);
         return "redirect:/crear_habitats";
     }
 
     @GetMapping("eliminarHabitats/{id}")
     public String eliminar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
+
+        for (Itinerario todo : serviciosItinerario.getTodos()) {
+            if (todo.getId_habitat() == id) {
+                attribute.addFlashAttribute("error", "No se puede eliminar ya que se esta utilizando el registro en un itinerario");
+                return "redirect:/mantenimiento_habitats";
+            }
+        }
+ 
         servicio.eliminar(id);
         attribute.addFlashAttribute("success", "Eliminado correctamente");
         return "redirect:/mantenimiento_habitats";
@@ -179,12 +204,12 @@ public class HabitatsUIControlador {
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
     }
-    
-     public void registrarUsuarioLogueado(Model model) {
+
+    public void registrarUsuarioLogueado(Model model) {
         Long id = null;
         for (Usuario todo : serviciosUsuario.getTodos()) {
             for (UsuarioLogueado object : serviciosUsuarioLogueado.getTodos()) {
-                if(todo.getId()==object.getId()){
+                if (todo.getId() == object.getId()) {
                     id = todo.getId();
                 }
             }
