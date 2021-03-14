@@ -5,9 +5,11 @@
  */
 package com.example.demo.controladores;
 
+import com.example.demo.modelos.EspecieHabitat;
 import com.example.demo.modelos.Especies;
 import com.example.demo.modelos.Usuario;
 import com.example.demo.modelos.UsuarioLogueado;
+import com.example.demo.servicios.EspecieHabitatServicios;
 import com.example.demo.servicios.EspecieServicios;
 import com.example.demo.servicios.UsuarioLogueadoServicios;
 import com.example.demo.servicios.UsuarioServicios;
@@ -45,6 +47,9 @@ public class EspecieUIControlador {
 
     @Autowired
     private UsuarioLogueadoServicios serviciosUsuarioLogueado;
+    
+    @Autowired
+    private EspecieHabitatServicios servicioEspecieHabitat;
 
     @RequestMapping("/mantenimiento_especie")
     public String irMantenimiento(Model model, RedirectAttributes attribute) {
@@ -162,7 +167,14 @@ public class EspecieUIControlador {
 
     @GetMapping("eliminar/{id}")
     public String eliminar(@PathVariable("id") Long id, Model modelo, RedirectAttributes attribute) {
-
+        
+        for (EspecieHabitat todo : servicioEspecieHabitat.getTodos()) {
+            if(todo.getId_especie()==id){
+                attribute.addFlashAttribute("error", "No se puede eliminar ya que la especie esta registrada en un habitat");
+                return "redirect:/mantenimiento_especie";
+            }
+        }
+        
         try {
             Especies temp = servicio.getValor(id).get();
 
@@ -177,7 +189,7 @@ public class EspecieUIControlador {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        attribute.addFlashAttribute("error", "Eliminado correctamente");
+        attribute.addFlashAttribute("success", "Eliminado correctamente");
         servicio.eliminar(id);
         return "redirect:/mantenimiento_especie";
     }

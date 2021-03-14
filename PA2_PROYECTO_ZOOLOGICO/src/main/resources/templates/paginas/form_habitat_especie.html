@@ -34,7 +34,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
                             </ul>
                         </li>
-                         <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Habitats
                             </a>
@@ -45,7 +45,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/habitat_especie" >Agregar especie a habitat</a></li>
                             </ul>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Especies
@@ -56,7 +56,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
                             </ul>
                         </li>
-                       
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Vegetación
@@ -66,8 +66,8 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/irVegetacion" th:if="${registro.id_rol==1}">Mantenimiento Vegetacion</a></li>
                             </ul>
                         </li>
-                        
-                         <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
+
+                        <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Usuarios
                             </a>
@@ -76,10 +76,10 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/crear_usuario" th:if="${registro.id_rol==1}">Agregar Usuario</a></li>
                             </ul>
                         </li>
-                        
-                        
-                        
-                        
+
+
+
+
                         <li class="nav-item">
                             <a class="nav-link" href="/" style="color: white;">Cerrar sesi&oacute;n</a>
                         </li>
@@ -97,7 +97,7 @@ and open the template in the editor.
         </div>
 
 
-        <div class="contenedor_general">
+        <div class="contenedor_general" >
             <div class="container p-3 my-3 ">
                 <div class="container mt-4">
                     <ul class="nav nav-tabs">
@@ -154,6 +154,7 @@ and open the template in the editor.
 
                     <div class="container" style=" margin-top: 10px">
                         <button type="submit" class="btn btn-primary">Guardar</button>
+
                     </div>
 
                 </form>
