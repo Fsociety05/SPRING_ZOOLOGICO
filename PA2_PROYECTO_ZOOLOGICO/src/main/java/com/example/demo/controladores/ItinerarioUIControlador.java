@@ -7,8 +7,12 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Habitats;
 import com.example.demo.modelos.Itinerario;
+import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.HabitatsServicios;
 import com.example.demo.servicios.ItinerarioServicios;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
+import com.example.demo.servicios.UsuarioServicios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ItinerarioUIControlador {
 
     private boolean editando = false;
+    private Usuario UsuarioLogueado = null;
 
     @Autowired
     private ItinerarioServicios servicio;
@@ -34,9 +39,16 @@ public class ItinerarioUIControlador {
     @Autowired
     private HabitatsServicios servicioHabitat;
 
-    @RequestMapping("/mantenimiento_itinerario" )
+    @Autowired
+    private UsuarioServicios serviciosUsuario;
+
+    @Autowired
+    private UsuarioLogueadoServicios serviciosUsuarioLogueado;
+
+    @RequestMapping("/mantenimiento_itinerario")
     public String irMantenimiento(Model model, RedirectAttributes attribute) {
         //verificacion();
+         registrarUsuarioLogueado(model);
         setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/mantenimiento_itinerario";
     }
@@ -44,12 +56,14 @@ public class ItinerarioUIControlador {
     @RequestMapping("/vista_itinerario")
     public String vista(Model model) {
         //verificacion();
+         registrarUsuarioLogueado(model);
         setParametro(model, "lista_Itinerario", servicio.getTodos());
         return "paginas/vista_Itinerario";
     }
 
     @GetMapping("/crear_itinerario")
     public String irCrear_itinerario(Model model) {
+        registrarUsuarioLogueado(model);
         setParametro(model, "itinerario", new Itinerario());
         setParametro(model, "lista_habitat_combo", servicioHabitat.getTodos());
         return "paginas/formItinerario";
@@ -57,6 +71,7 @@ public class ItinerarioUIControlador {
 
     @GetMapping("/actualizarItinerario/{id}")
     public String irActualizar(@PathVariable("id") Long id, Model modelo) {
+         registrarUsuarioLogueado(modelo);
         setParametro(modelo, "itinerario", servicio.getValor(id));
         setParametro(modelo, "lista_habitat_combo", servicioHabitat.getTodos());
 
@@ -74,9 +89,9 @@ public class ItinerarioUIControlador {
             attribute.addFlashAttribute("error", "No hay habitats en el sistema");
             return "redirect:/crear_itinerario";
         }
-        
+
         System.out.println("Editando= " + editando);
-        
+
         for (Itinerario todo : temp) {
 
             if (editando) {
@@ -135,6 +150,19 @@ public class ItinerarioUIControlador {
 
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
+    }
+
+    public void registrarUsuarioLogueado(Model model) {
+        Long id = null;
+        for (Usuario todo : serviciosUsuario.getTodos()) {
+            for (UsuarioLogueado object : serviciosUsuarioLogueado.getTodos()) {
+                if(todo.getId()==object.getId()){
+                    id = todo.getId();
+                }
+            }
+        }
+
+        setParametro(model, "registro", serviciosUsuario.getValor(id).get());
     }
 
 }
