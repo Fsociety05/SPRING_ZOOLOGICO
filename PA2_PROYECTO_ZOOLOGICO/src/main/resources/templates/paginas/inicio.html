@@ -31,7 +31,7 @@ and open the template in the editor.
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
                         </li>
-                        <!-- 
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Itinerario
@@ -42,7 +42,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
                             </ul>
                         </li>
-                         <li class="nav-item dropdown">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Habitats
                             </a>
@@ -53,7 +53,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/habitat_especie" >Agregar especie a habitat</a></li>
                             </ul>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Especies
@@ -64,7 +64,7 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
                             </ul>
                         </li>
-                       
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Vegetación
@@ -74,8 +74,8 @@ and open the template in the editor.
                                 <li><a class="dropdown-item" href="/irVegetacion" th:if="${registro.id_rol==1}">Mantenimiento Vegetacion</a></li>
                             </ul>
                         </li>
-                        -->
-                         <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
+
+                        <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Usuarios
                             </a>
@@ -93,66 +93,66 @@ and open the template in the editor.
             </div>
         </nav>        
         <br>
-        
+
         <!--INICIA CODIGO DE CARDS DE INICIO -->
-        <div class="row">
-                <div class="col-sm-3">
-                  <div class="card">
-                      <img src="/images/card-image-itinerarios.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Itinerarios</h5>
-                      <p class="card-text">Escoge tu aventura. Un recorrido inolvidable cercano a la madre naturaleza.</p>
-                      <a href="/vista_itinerario" class="btn btn-primary">Ver</a>
-                      <a href="/crear_itinerario" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
-                      <a href="/mantenimiento_itinerario" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="card">
-                      <img src="/images/card-image-habitats.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Habitats</h5>
-                      <p class="card-text">Panoramas increibles y diversos. Observa donde viven cada una de las especies.</p>
-                      <a href="/vista_habitats" class="btn btn-primary">Ver</a>
-                      <a href="/crear_habitats" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
-                      <a href="/mantenimiento_habitats" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
-                    </div>
-                  </div>
-                </div>
+        <div class="row" >
             <div class="col-sm-3">
-                  <div class="card">
-                      <img src="/images/card-image-especies.jpg" class="card-img-top" alt="...">
+                <div class="card">
+                    <img src="/images/card-image-itinerarios.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Especies</h5>
-                      <p class="card-text">Una gran cantidad de especies para tu observacion e investigacion. </p>
-                      <a href="/vista_especie" class="btn btn-primary">Ver</a>
-                      <a href="/crear" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
-                      <a href="/mantenimiento_especie" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
+                        <h5 class="card-title">Itinerarios</h5>
+                        <p class="card-text">Escoge tu aventura. Un recorrido inolvidable cercano a la madre naturaleza.</p>
+                        <a href="/vista_itinerario" class="btn btn-primary">Ver</a>
+                        <a href="/crear_itinerario" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
+                        <a href="/mantenimiento_itinerario" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
                     </div>
-                  </div>
                 </div>
+            </div>
             <div class="col-sm-3">
-                  <div class="card">
-                      <img src="/images/card-image-vegetacion.jpg" class="card-img-top" alt="...">
+                <div class="card">
+                    <img src="/images/card-image-habitats.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                      <h5 class="card-title">Vegetación</h5>
-                      <p class="card-text">Observa la diversidad de plantas, arboles y flores a disposicion de tus ojos.</p>
-                      <a href="/crearVegetacion" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
-                      <a href="/irVegetacion" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
+                        <h5 class="card-title">Habitats</h5>
+                        <p class="card-text">Panoramas increibles y diversos. Observa donde viven cada una de las especies.</p>
+                        <a href="/vista_habitats" class="btn btn-primary">Ver</a>
+                        <a href="/crear_habitats" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
+                        <a href="/mantenimiento_habitats" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
                     </div>
-                  </div>
                 </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img src="/images/card-image-especies.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Especies</h5>
+                        <p class="card-text">Una gran cantidad de especies para tu observacion e investigacion. </p>
+                        <a href="/vista_especie" class="btn btn-primary">Ver</a>
+                        <a href="/crear" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
+                        <a href="/mantenimiento_especie" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img src="/images/card-image-vegetacion.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Vegetación</h5>
+                        <p class="card-text">Observa la diversidad de plantas, arboles y flores a disposicion de tus ojos.</p>
+                        <a href="/crearVegetacion" th:if="${registro.id_rol==1}" class="btn btn-primary">Agregar</a>
+                        <a href="/irVegetacion" th:if="${registro.id_rol==1}" class="btn btn-primary">Mantenimiento</a>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         <br>
-        
+
         <footer>
-            
-                <p>Derechos Reservados</p>
-            
+
+            <p>Derechos Reservados</p>
+
         </footer>
-        
+
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
 </html>
