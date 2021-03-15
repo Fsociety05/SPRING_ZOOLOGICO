@@ -149,22 +149,22 @@ public class ControladorGeneral {
         servicioRol.guardar(temp2);
 
         ////////////////////////////////////////////////////////////////////////////
-        Especies tempEsp = new Especies();
-        Especies tempEsp2 = new Especies();
-
-        tempEsp.setNombreComun("Generado 1");
-        tempEsp.setNombreCientifico("Generado 1 cientifico xd");
-        tempEsp.setDescripcion("Este es una especie generada automaticamenta");
-        tempEsp.setFoto("/images/defecto.png");
-
-        servicioEspecie.guardar(tempEsp);
-
-        tempEsp2.setNombreComun("Generado 2");
-        tempEsp2.setNombreCientifico("Generado 2 cientifico xd");
-        tempEsp2.setDescripcion("Este es una especie generada automaticamenta");
-        tempEsp2.setFoto("/images/defecto.png");
-
-        servicioEspecie.guardar(tempEsp2);
+//        Especies tempEsp = new Especies();
+//        Especies tempEsp2 = new Especies();
+//
+//        tempEsp.setNombreComun("Generado 1");
+//        tempEsp.setNombreCientifico("Generado 1 cientifico xd");
+//        tempEsp.setDescripcion("Este es una especie generada automaticamenta");
+//        tempEsp.setFoto("/images/defecto.png");
+//
+//        servicioEspecie.guardar(tempEsp);
+//
+//        tempEsp2.setNombreComun("Generado 2");
+//        tempEsp2.setNombreCientifico("Generado 2 cientifico xd");
+//        tempEsp2.setDescripcion("Este es una especie generada automaticamenta");
+//        tempEsp2.setFoto("/images/defecto.png");
+//
+//        servicioEspecie.guardar(tempEsp2);
         
         ////////////////////////////////////////////////////////////////////////////////
         Usuario tempUser = new Usuario();
@@ -175,14 +175,14 @@ public class ControladorGeneral {
         tempUser.setDni("00");
         servicioUsuario.guardar(tempUser);
         
-        Usuario tempUser2 = new Usuario();
-        
-        tempUser2.setNom_usuario("Empleado");
-        tempUser2.setContrasenia("123");
-        tempUser2.setId_rol(temp2.getId());
-        tempUser2.setDni("00");
-        servicioUsuario.guardar(tempUser2);
-        
+//        Usuario tempUser2 = new Usuario();
+//        
+//        tempUser2.setNom_usuario("Empleado");
+//        tempUser2.setContrasenia("123");
+//        tempUser2.setId_rol(temp2.getId());
+//        tempUser2.setDni("00");
+//        servicioUsuario.guardar(tempUser2);
+//        
         Clima temClima1 = new Clima();
         Clima tempClima2 = new Clima();
         Clima tempClima3 = new Clima();
@@ -217,9 +217,9 @@ public class ControladorGeneral {
 
 
 ///////////////////////////////////////////////////////////////////////////////
-        Vegetacion tempVege3 = new Vegetacion();
-        tempVege3.setNombre("Bosques de Sabana");
-        tempVege3.setDescripcion("regiones entre el desierto y el bosque tropical.");
-        servicioVegetacion.guardar(tempVege3);
+//        Vegetacion tempVege3 = new Vegetacion();
+//        tempVege3.setNombre("Bosques de Sabana");
+//        tempVege3.setDescripcion("regiones entre el desierto y el bosque tropical.");
+//        servicioVegetacion.guardar(tempVege3);
     }
 }

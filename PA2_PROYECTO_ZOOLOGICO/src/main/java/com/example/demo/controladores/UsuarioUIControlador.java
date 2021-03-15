@@ -56,7 +56,7 @@ public class UsuarioUIControlador {
     @GetMapping("/crear_usuario")
     public String irCrear_usuario(Model model, RedirectAttributes attribute) {
         registrarUsuarioLogueado(model);
-        setParametro(model, "registro", new Usuario());
+        setParametro(model, "user", new Usuario());
         setParametro(model, "lista_rol", servicioRol.getTodos()); //se agregan los roles al combobox
         return "paginas/formUsuario";
     }
@@ -139,7 +139,7 @@ public class UsuarioUIControlador {
 
         } else {
             editando = true;
-            setParametro(modelo, "registro", servicio.getValor(id));//se pone el ojeto de la pagina del formulario
+            setParametro(modelo, "user", servicio.getValor(id));//se pone el ojeto de la pagina del formulario
             setParametro(modelo, "lista_rol", servicioRol.getTodos()); //se agregan los roles al combobox
             registrarUsuarioLogueado(modelo);
             return "paginas/formUsuario";
