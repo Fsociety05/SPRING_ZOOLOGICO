@@ -41,3 +41,11 @@
 }
 
 
+
+footer {
+    background-image: url(../images/fondo2.png);
+    color: white;
+    bottom: 0;
+    text-align: center;
+    padding: 10px;
+}
