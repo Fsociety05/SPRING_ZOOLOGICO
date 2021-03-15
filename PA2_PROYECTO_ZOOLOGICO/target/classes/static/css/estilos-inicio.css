@@ -51,6 +51,8 @@ body {
 
 .btn{
     font-size: small;
+    background-color: green;
+    border-color:green;
 }
 
 .card {

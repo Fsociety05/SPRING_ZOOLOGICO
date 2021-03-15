@@ -41,10 +41,11 @@
 }
 
 
-
 footer {
+    position: fixed;
     background-image: url(../images/fondo2.png);
     color: white;
+    width: 100%;
     bottom: 0;
     text-align: center;
     padding: 10px;
