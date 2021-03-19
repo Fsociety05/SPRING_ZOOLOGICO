@@ -10,11 +10,13 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/css/estilos-frm-esp.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/estilos_form_itinerario.css" rel="stylesheet" type="text/css"/>
         <link href="/css/estilos_nav.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
-        <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
+
+       <nav id = "menu" class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,20 +26,14 @@ and open the template in the editor.
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/inicio" style="color: white;">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" style="color: white;">Itinerarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/irUsuario" style="color: white;">Usuarios</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Especies
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Itinerario
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear" >Agregar especie</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_especie" >Mantenimiento Especie</a></li>
-                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                                <li><a class="dropdown-item" href="/crear_itinerario" >Agregar Itinerario</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_itinerario" th:if="${registro.id_rol==1}">Mantenimiento Itinerario</a></li>
+                                <li><a class="dropdown-item" href="/vista_itinerario" >Ver Itinerarios</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -45,77 +41,128 @@ and open the template in the editor.
                                 Habitats
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crear_habitats" >Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/crear_habitats" th:if="${registro.id_rol==1}">Agregar Habitát</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_habitats" th:if="${registro.id_rol==1}">Mantenimiento Habitát</a></li>
                                 <li><a class="dropdown-item" href="/vista_habitats" >Ver Habitáts</a></li>
-                                <li><a class="dropdown-item" href="/mantenimiento_habitats" >Mantenimiento Habitát</a></li>
+                                <li><a class="dropdown-item" href="/habitat_especie" >Agregar especie a habitat</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Especies
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/crear" th:if="${registro.id_rol==1}">Agregar especie</a></li>
+                                <li><a class="dropdown-item" href="/mantenimiento_especie" th:if="${registro.id_rol==1}">Mantenimiento Especie</a></li>
+                                <li><a class="dropdown-item" href="/vista_especie" >Ver especies</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Vegetación
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/crearVegetacion" >Agregar Vegetación</a></li>
-                                <li><a class="dropdown-item" href="/irVegetacion" >Mantenimiento Vegetacion</a></li>
+                                <li><a class="dropdown-item" href="/crearVegetacion" th:if="${registro.id_rol==1}">Agregar Vegetación</a></li>
+                                <li><a class="dropdown-item" href="/irVegetacion" th:if="${registro.id_rol==1}">Mantenimiento Vegetacion</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown" th:if="${registro.id_rol==1}">
+                            <a class="nav-link dropdown-toggle"  style="color: white;" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuarios
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/irUsuario" th:if="${registro.id_rol==1}">Mantenimiento Usuario</a></li>
+                                <li><a class="dropdown-item" href="/crear_usuario" th:if="${registro.id_rol==1}">Agregar Usuario</a></li>
+                            </ul>
+                        </li>
+
+
+
+
                         <li class="nav-item">
-                            <a class="nav-link" href="/" style="color: white;">Salir</a>
+                            <a class="nav-link" href="/" style="color: white;">Cerrar sesi&oacute;n</a>
                         </li>
                     </ul>
 
-                    <span class="navbar-text" style="color: white;">
-                        Acompañanos
-                    </span>
+
                     <a class="navbar-brand" href="#"><img id="logo" th:src="@{/images/logo.png}" class="float-end" ></a>
                 </div>
             </div>
         </nav>
 
-        <div class="container mt-4">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/mantenimiento_itinerario">Mantenimiento Habitats</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page">Registrar Habitats</a>
-                </li>
-            </ul>
+        <div class="container mt-4 barra-titulo">
+            <a href="/inicio">Inicio</a>
+            / Itinerario
         </div>
 
-        <div class="container mt-4">
-            <form action="#" th:action="@{/guardarItinerario}" th:object="${itinerario}" method="post">
-                <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre Itinerario</label>
-                    <input class="form-control" type="text" id="nombre" th:field="*{nombre}" name="nombre">
+
+
+        <div class="contenedor_general">
+
+            <div class="container mt-4">
+                <ul class="nav nav-tabs">
+                    <!--<li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/mantenimiento_itinerario">Mantenimiento Itinerario</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page">Formulario Itineraio</a>
+                    </li>
+                </ul>
+                <div class="container" id="container_mensages">
+                    <!--MENSAJES-->
+                    <div class="alert alert-success alert-dismissable fade show" th:if="${success != null}">
+                        <label th:text="${success}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-danger alert-dismissable" th:if="${error != null}">
+                        <label th:text="${error}" class="label_mensaje"></label>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
-                <input type="hidden" th:field="*{id}" name="id" id="id">
-                <div class="mb-3">
-                    <label for="horaIncio" class="form-label">Horario Inicio</label>
-                    <input class="form-control" type="time" id="horaIncio" th:field="*{horaIncio}" name="horaIncio">
-                </div>
-                <div class="mb-3">
-                    <label for="horaFin" class="form-label">Horario Fin</label>
-                    <input class="form-control" type="time" id="horaFin" th:field="*{horaFin}" name="horaFin">
-                </div>
-                <div class="mb-3">
-                    <label for="area" class="form-label">Area</label>
-                    <input class="form-control" type="text" id="area" th:field="*{area}" name="area">
-                </div>
-                <div class="mb-3">
-                    <label for="numeroVisitantes" class="form-label">Numero Visitantes</label>
-                    <input class="form-control" type="number" id="numeroVisitantes" th:field="*{numeroVisitantes}" min="1" name="numeroVisitantes">
-                </div>
-                <div class="mb-3">
-                    <label for="nombreHabitat" class="form-label">Habitat</label>
-                    <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
-                        <option th:if="${lista_habitat_combo.isEmpty()}" value="0">No hay Habitat</option>
-                        <option th:!if="${lista_habitat_combo.isEmpty()}" th:each="habitatt : ${lista_habitat_combo}" th:value="${habitatt.id}" th:text="${habitatt.nombre}" name="nombreHabitat"></option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
+            </div>
+
+            <div class="container mt-4">
+                <form action="#" th:action="@{/guardarItinerario}" th:object="${itinerario}" method="post">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre Itinerario</label>
+                        <input class="form-control" type="text" id="nombre" th:field="*{nombre}" name="nombre" required>
+                    </div>
+                    <input type="hidden" th:field="*{id}" name="id" id="id">
+                    <div class="mb-3">
+                        <label for="horaIncio" class="form-label">Horario Inicio</label>
+                        <input class="form-control" type="time" id="horaIncio" th:field="*{horaIncio}" name="horaIncio" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="horaFin" class="form-label">Horario Fin</label>
+                        <input class="form-control" type="time" id="horaFin" th:field="*{horaFin}" name="horaFin" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="area" class="form-label">Area</label>
+                        <input class="form-control" type="text" id="area" th:field="*{area}" name="area" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="numeroVisitantes" class="form-label">Numero Visitantes</label>
+                        <input class="form-control" type="number" id="numeroVisitantes" th:field="*{numeroVisitantes}" min="1" name="numeroVisitantes" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreHabitat" class="form-label">Habitat</label>
+                        <select class="form-select" aria-label="Default select example" th:field="*{id_habitat}">
+                            <option th:if="${lista_habitat_combo.isEmpty()}" value="0">No hay Habitat</option>
+                            <option th:!if="${lista_habitat_combo.isEmpty()}" th:each="habitatt : ${lista_habitat_combo}" th:value="${habitatt.id}" th:text="${habitatt.nombre}" name="nombreHabitat"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    
+                    <a th:if="${registro.id_rol==1}" href="/mantenimiento_itinerario" class="btn btn-warning">Ir a mantenimiento</a>
+                </form>
+
+                <div class="container" id="container_mensages"></div>
+            </div>
         </div>
+
 
         <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
