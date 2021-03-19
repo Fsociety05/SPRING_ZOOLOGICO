@@ -6,7 +6,6 @@
 package com.example.demo.servicios;
 
 import com.example.demo.modelos.Habitats;
-import com.example.demo.modelos.Usuario;
 import com.example.demo.repositorios.HabitatsRepositorio;
 import java.util.List;
 import java.util.Optional;
@@ -39,4 +38,7 @@ public class HabitatsServicios {
         return (List<Habitats>) repositorio.findAll();
     }
     
+    public Habitats getUno(Long id) {
+        return repositorio.findById(id).get();
+    }
 }

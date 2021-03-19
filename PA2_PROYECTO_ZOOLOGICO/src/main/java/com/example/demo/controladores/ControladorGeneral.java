@@ -7,12 +7,22 @@ package com.example.demo.controladores;
 
 import com.example.demo.modelos.Clima;
 import com.example.demo.modelos.Especies;
+import com.example.demo.modelos.Vegetacion;
+import com.example.demo.modelos.IndiceVulnerabilidad;
+import com.example.demo.modelos.Habitats;
+import com.example.demo.modelos.Itinerario;
 import com.example.demo.modelos.Rol;
 import com.example.demo.modelos.Usuario;
+import com.example.demo.modelos.UsuarioLogueado;
 import com.example.demo.servicios.ClimaServicios;
 import com.example.demo.servicios.EspecieServicios;
+import com.example.demo.servicios.IndiceVulnerabilidadServicios;
+import com.example.demo.servicios.HabitatsServicios;
+import com.example.demo.servicios.ItinerarioServicios;
 import com.example.demo.servicios.RolServicios;
+import com.example.demo.servicios.UsuarioLogueadoServicios;
 import com.example.demo.servicios.UsuarioServicios;
+import com.example.demo.servicios.VegetacionServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,10 +41,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ControladorGeneral {
 
     private boolean primerInicio = true;
-    private Usuario usuario_logueado;
+    Usuario usuario_logueado;
 //////////////////////////////////////////////
     @Autowired
     private RolServicios servicioRol;
+    
+    @Autowired
+    private HabitatsServicios servicioHabitat;
     
     @Autowired
     private ClimaServicios servicioClima;
@@ -44,6 +57,18 @@ public class ControladorGeneral {
 
     @Autowired
     private UsuarioServicios servicioUsuario;
+    
+    @Autowired
+    private IndiceVulnerabilidadServicios servicioIndice;
+    
+    @Autowired
+    private VegetacionServicio servicioVegetacion;
+    
+    @Autowired
+    private ItinerarioServicios servicioItinerario;
+    
+    @Autowired
+    private UsuarioLogueadoServicios servicioUsuarioLogueado;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -52,7 +77,10 @@ public class ControladorGeneral {
             cargarTablas();
             primerInicio = false;
         }
-        
+            
+        for (UsuarioLogueado object : servicioUsuarioLogueado.getTodos()) {
+            servicioUsuarioLogueado.eliminar(object.getId());
+        }
          setParametro(model, "registro", new Usuario());
 
         return "index";
@@ -61,6 +89,12 @@ public class ControladorGeneral {
     @RequestMapping("/inicio")
     public String inicio(Model model) {
         setParametro(model, "registro", usuario_logueado);
+        
+        UsuarioLogueado temp = new UsuarioLogueado();
+        temp.setId(usuario_logueado.getId());
+        temp.setId_rol(usuario_logueado.getId_rol());
+        temp.setUsuario(usuario_logueado.getNom_usuario());
+        servicioUsuarioLogueado.guardar(temp);
 
         return "paginas/inicio";
     }
@@ -78,7 +112,7 @@ public class ControladorGeneral {
                     usuario_logueado=temp;
                     return "redirect:/inicio";
                 }
-                
+                usuarioEncontrado = true;
             }
         }
         
@@ -96,6 +130,9 @@ public class ControladorGeneral {
     public void setParametro(Model model, String atributo, Object valor) {
         model.addAttribute(atributo, valor);
     }
+    //////////////////////////////////////////////////////Intinerario
+    
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
     private void cargarTablas() {
         Rol temp = new Rol();
@@ -112,22 +149,22 @@ public class ControladorGeneral {
         servicioRol.guardar(temp2);
 
         ////////////////////////////////////////////////////////////////////////////
-        Especies tempEsp = new Especies();
-        Especies tempEsp2 = new Especies();
-
-        tempEsp.setNombreComun("Generado 1");
-        tempEsp.setNombreCientifico("Generado 1 cientifico xd");
-        tempEsp.setDescripcion("Este es una especie generada automaticamenta");
-        tempEsp.setFoto("/images/defecto.png");
-
-        servicioEspecie.guardar(tempEsp);
-
-        tempEsp2.setNombreComun("Generado 2");
-        tempEsp2.setNombreCientifico("Generado 2 cientifico xd");
-        tempEsp2.setDescripcion("Este es una especie generada automaticamenta");
-        tempEsp2.setFoto("/images/defecto.png");
-
-        servicioEspecie.guardar(tempEsp2);
+//        Especies tempEsp = new Especies();
+//        Especies tempEsp2 = new Especies();
+//
+//        tempEsp.setNombreComun("Generado 1");
+//        tempEsp.setNombreCientifico("Generado 1 cientifico xd");
+//        tempEsp.setDescripcion("Este es una especie generada automaticamenta");
+//        tempEsp.setFoto("/images/defecto.png");
+//
+//        servicioEspecie.guardar(tempEsp);
+//
+//        tempEsp2.setNombreComun("Generado 2");
+//        tempEsp2.setNombreCientifico("Generado 2 cientifico xd");
+//        tempEsp2.setDescripcion("Este es una especie generada automaticamenta");
+//        tempEsp2.setFoto("/images/defecto.png");
+//
+//        servicioEspecie.guardar(tempEsp2);
         
         ////////////////////////////////////////////////////////////////////////////////
         Usuario tempUser = new Usuario();
@@ -135,8 +172,17 @@ public class ControladorGeneral {
         tempUser.setNom_usuario("admin");
         tempUser.setContrasenia("admin");
         tempUser.setId_rol(temp.getId());
-        
+        tempUser.setDni("00");
         servicioUsuario.guardar(tempUser);
+        
+//        Usuario tempUser2 = new Usuario();
+//        
+//        tempUser2.setNom_usuario("Empleado");
+//        tempUser2.setContrasenia("123");
+//        tempUser2.setId_rol(temp2.getId());
+//        tempUser2.setDni("00");
+//        servicioUsuario.guardar(tempUser2);
+//        
         Clima temClima1 = new Clima();
         Clima tempClima2 = new Clima();
         Clima tempClima3 = new Clima();
@@ -152,7 +198,28 @@ public class ControladorGeneral {
         tempClima3.setNombre("Clima Frio");
         tempClima3.setDescripcion("Aquellos en los que predominan las temperaturas bajas a lo largo del anio");
         servicioClima.guardar(tempClima3);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        IndiceVulnerabilidad tempVulne = new IndiceVulnerabilidad();
+        tempVulne.setNombre_indice("Bajo");
+        tempVulne.setDescripcion("");
+        servicioIndice.guardar(tempVulne);
+        
+        IndiceVulnerabilidad tempVulne2 = new IndiceVulnerabilidad();
+        tempVulne2.setNombre_indice("Medio");
+        tempVulne2.setDescripcion("");
+        servicioIndice.guardar(tempVulne2);
+
+        
+        IndiceVulnerabilidad tempVulne3 = new IndiceVulnerabilidad();
+        tempVulne3.setNombre_indice("Alto");
+        tempVulne3.setDescripcion("");
+        servicioIndice.guardar(tempVulne3);
 
 
+///////////////////////////////////////////////////////////////////////////////
+//        Vegetacion tempVege3 = new Vegetacion();
+//        tempVege3.setNombre("Bosques de Sabana");
+//        tempVege3.setDescripcion("regiones entre el desierto y el bosque tropical.");
+//        servicioVegetacion.guardar(tempVege3);
     }
 }
