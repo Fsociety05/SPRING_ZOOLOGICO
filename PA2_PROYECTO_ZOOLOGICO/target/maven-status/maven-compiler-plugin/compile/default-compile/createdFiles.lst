@@ -12,10 +12,13 @@ com\example\demo\servicios\UsuarioServicios.class
 com\example\demo\modelos\EspecieHabitat.class
 com\example\demo\modelos\Especies.class
 com\example\demo\servicios\EspecieHabitatServicios.class
+com\example\demo\controladores\VulnerabilidadApiControlador.class
 com\example\demo\repositorios\IndiceVulnerabilidadRepositorio.class
 com\example\demo\modelos\Habitats.class
 com\example\demo\controladores\RolApiControlador.class
+com\example\demo\controladores\EspecieApiControlador.class
 com\example\demo\configuracion\SwaggerConfig.class
+com\example\demo\controladores\ItinerarioApiControlador.class
 com\example\demo\controladores\RolUIControlador.class
 com\example\demo\servicios\RolServicios.class
 com\example\demo\repositorios\UsuarioRepositorio.class
@@ -24,11 +27,13 @@ com\example\demo\servicios\IndiceVulnerabilidadServicios.class
 com\example\demo\servicios\VegetacionServicio.class
 com\example\demo\repositorios\HabitatsRepositorio.class
 com\example\demo\modelos\Vegetacion.class
+com\example\demo\controladores\UsuarioApiControlador.class
 com\example\demo\repositorios\RolRepositorio.class
 com\example\demo\repositorios\VegetacionRepositorio.class
 com\example\demo\controladores\EspecieUIControlador.class
 com\example\demo\modelos\Itinerario.class
 com\example\demo\controladores\ItinerarioUIControlador.class
+com\example\demo\controladores\ClimaApiControlador.class
 com\example\demo\controladores\HabitatEspecieUIControlador.class
 com\example\demo\repositorios\EspecieRepositorio.class
 com\example\demo\controladores\UsuarioUIControlador.class
@@ -39,4 +44,6 @@ com\example\demo\repositorios\UsuarioLogueadoRepositorio.class
 com\example\demo\modelos\Rol.class
 com\example\demo\modelos\Usuario.class
 com\example\demo\repositorios\EspecieHabitatRepositorio.class
+com\example\demo\controladores\HabitatApiControlador.class
+com\example\demo\controladores\VegetacionApiControlador.class
 com\example\demo\controladores\ControladorGeneral.class
